@@ -1,16 +1,26 @@
+import Image from "next/image";
 import Link from "next/link";
+import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { ABOUT_STORY, HOURS, LOCATION_HIGHLIGHTS, ORDER_URL, SITE } from "@/lib/siteData";
+import { ABOUT_STORY, GALLERY_IMAGES, HERO_IMAGES, HOURS, LOCATION_HIGHLIGHTS, ORDER_URL, SITE } from "@/lib/siteData";
 
 export default function AboutPage() {
   return (
-    <main className="pt-28 md:pt-32">
+    <main>
+      <PageHero
+        eyebrow="About"
+        title="Rooted in Community, Crafted with Care"
+        subtitle="A welcoming East Village café shaped by Lower East Side roots, thoughtful hospitality, and food and drinks made with intention."
+        image={HERO_IMAGES[0].src}
+        alt={HERO_IMAGES[0].alt}
+      />
+
       <section className="section-padding pb-14">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <Reveal>
             <div>
               <p className="section-kicker">About & Location</p>
-              <h1 className="section-title">A vibrant café rooted in East Village hospitality.</h1>
+              <h2 className="section-title">A vibrant café rooted in East Village hospitality.</h2>
               <p className="section-copy">
                 Warm coffeehouse energy, Latin flavor, and neighborhood care come together at one small-but-memorable corner on East 1st Street.
               </p>
@@ -82,7 +92,7 @@ export default function AboutPage() {
       <section className="section-padding bg-white/55">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.94fr_1.06fr] lg:items-start">
           <Reveal>
-            <div className="glass-panel overflow-hidden">
+            <div className="glass-panel overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(42,24,16,0.12)]">
               <div className="p-8 md:p-10">
                 <p className="section-kicker">Visit Café La Fe</p>
                 <h2 className="section-title text-[2.8rem] md:text-5xl">70 E 1st St</h2>
@@ -124,17 +134,28 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="glass-panel p-8 md:p-10">
-              <p className="section-kicker">What You’ll Find</p>
-              <div className="mt-6 grid gap-4">
-                <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.9))] p-5">
-                  <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Organic Coffee & Matcha</p>
-                  <p className="mt-3 text-base leading-8 text-ink/72">Balanced espresso drinks, premium matcha, and tea-based creations with a modern café feel.</p>
+            <div className="grid gap-4">
+              <div className="glass-panel p-8 md:p-10">
+                <p className="section-kicker">What You’ll Find</p>
+                <div className="mt-6 grid gap-4">
+                  <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.9))] p-5">
+                    <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Organic Coffee & Matcha</p>
+                    <p className="mt-3 text-base leading-8 text-ink/72">Balanced espresso drinks, premium matcha, and tea-based creations with a modern café feel.</p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.9))] p-5">
+                    <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Savory & Sweet Favorites</p>
+                    <p className="mt-3 text-base leading-8 text-ink/72">Handcrafted empanadas, pastries, juices, and treats designed to feel generous and comforting.</p>
+                  </div>
                 </div>
-                <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.9))] p-5">
-                  <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Savory & Sweet Favorites</p>
-                  <p className="mt-3 text-base leading-8 text-ink/72">Handcrafted empanadas, pastries, juices, and treats designed to feel generous and comforting.</p>
-                </div>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {GALLERY_IMAGES.slice(10, 14).map((image) => (
+                  <div key={image.src} className="glass-panel overflow-hidden">
+                    <div className="relative aspect-[4/3]">
+                      <Image src={image.src} alt={image.alt} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 640px) 22vw, 100vw" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </Reveal>

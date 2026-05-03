@@ -1,9 +1,10 @@
 "use client";
 
-import { startTransition, useDeferredValue, useMemo, useState } from "react";
+import { startTransition, useDeferredValue, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { MENU_GROUPS, MENU_SEARCH_HINTS, type MenuGroup } from "@/lib/siteData";
+import { HERO_IMAGES, MENU_GROUPS, MENU_SEARCH_HINTS, type MenuGroup } from "@/lib/siteData";
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -18,6 +19,7 @@ export default function MenuPage() {
   const deferredQuery = useDeferredValue(query);
   const [openMobileSection, setOpenMobileSection] = useState<string>(MENU_GROUPS[0].slug);
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [activeSection, setActiveSection] = useState<string>(MENU_GROUPS[0].slug);
 
   const filters = useMemo(() => ["all", ...MENU_GROUPS.map((group) => group.slug)], []);
 
@@ -34,13 +36,48 @@ export default function MenuPage() {
     })).filter((group) => group.items.length > 0);
   }, [activeFilter, deferredQuery]);
 
+  useEffect(() => {
+    if (filteredGroups.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target?.id) {
+          setActiveSection(visible.target.id.replace(/^menu-/, ""));
+        }
+      },
+      {
+        rootMargin: "-18% 0px -58% 0px",
+        threshold: [0.15, 0.3, 0.5],
+      },
+    );
+
+    filteredGroups.forEach((group) => {
+      const element = document.getElementById(groupId(group));
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [filteredGroups]);
+
   return (
-    <main className="pt-28 md:pt-32">
-      <section className="section-padding pb-14">
-        <div className="section-shell">
+    <main>
+      <PageHero
+        eyebrow="Menu"
+        title="Handcrafted Drinks, Fresh Bites, and Daily Favorites"
+        subtitle="A full menu of coffee, matcha, bubble tea, empanadas, pastries, and neighborhood staples, organized to be easy to browse and even easier to order."
+        image={HERO_IMAGES[3].src}
+        alt={HERO_IMAGES[3].alt}
+      />
+
+      <section className="section-padding pb-10">
+        <div className="page-shell-wide">
           <Reveal>
-            <p className="section-kicker">Menu</p>
-            <h1 className="section-title">Search the full Café La Fe menu.</h1>
+            <p className="section-kicker">Menu Explorer</p>
+            <h2 className="section-title">Search the full Café La Fe menu.</h2>
             <p className="section-copy max-w-3xl">
               Browse by section, filter by menu group, and search by item name or flavor. The layout stays text-first so the menu is easier to scan and maintain.
             </p>
@@ -94,16 +131,20 @@ export default function MenuPage() {
       </section>
 
       <section className="section-padding pt-0">
-        <div className="section-shell grid gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
+        <div className="page-shell-wide grid gap-8 xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10">
           <Reveal className="hidden lg:block">
-            <aside className="glass-panel sticky top-28 p-5">
+            <aside className="glass-panel sticky top-28 p-5 xl:block">
               <p className="text-xs uppercase tracking-[0.28em] text-olive-700">Sections</p>
               <nav className="mt-5 flex flex-col gap-2">
                 {filteredGroups.map((group) => (
                   <a
                     key={group.slug}
                     href={`#${groupId(group)}`}
-                    className="rounded-2xl px-4 py-3 text-sm leading-6 text-ink/74 transition hover:bg-olive-50 hover:text-ink"
+                    className={`rounded-2xl px-4 py-3 text-sm leading-6 transition ${
+                      activeSection === group.slug
+                        ? "bg-olive-100 text-ink shadow-[inset_0_0_0_1px_rgba(74,107,88,0.14)]"
+                        : "text-ink/74 hover:bg-olive-50 hover:text-ink"
+                    }`}
                   >
                     <span className="block font-medium text-ink">{group.title}</span>
                     <span className="block text-xs uppercase tracking-[0.16em] text-olive-700">{group.categories.join(" • ")}</span>
@@ -113,7 +154,22 @@ export default function MenuPage() {
             </aside>
           </Reveal>
 
-          <div className="space-y-5 lg:hidden">
+          <div className="space-y-5 xl:hidden">
+            <div className="no-scrollbar -mx-1 overflow-x-auto pb-1">
+              <div className="flex min-w-max gap-3 px-1">
+                {filteredGroups.map((group) => (
+                  <a
+                    key={group.slug}
+                    href={`#${groupId(group)}`}
+                    className={`rounded-full px-4 py-2 text-xs uppercase tracking-[0.18em] transition ${
+                      activeSection === group.slug ? "bg-ink text-cream" : "bg-white text-ink/75 ring-1 ring-olive-100"
+                    }`}
+                  >
+                    {group.title}
+                  </a>
+                ))}
+              </div>
+            </div>
             {filteredGroups.map((group) => {
               const open = openMobileSection === group.slug;
 
@@ -166,7 +222,7 @@ export default function MenuPage() {
             })}
           </div>
 
-          <div className="hidden space-y-10 lg:block">
+          <div className="hidden space-y-12 xl:block">
             {filteredGroups.length === 0 ? (
               <Reveal>
                 <div className="glass-panel p-10">
@@ -178,17 +234,18 @@ export default function MenuPage() {
               filteredGroups.map((group, index) => (
                 <Reveal key={group.slug} delay={index * 0.03}>
                   <section id={groupId(group)} className="scroll-mt-32">
-                    <div className="mb-6">
-                      <p className="section-kicker">{group.categories.join(" • ")}</p>
-                      <h2 className="section-title text-[3rem] md:text-[3.8rem]">{group.title}</h2>
-                      <p className="mt-4 max-w-2xl text-base leading-8 text-ink/70">{group.description}</p>
+                    <div className="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                      <div>
+                        <p className="section-kicker">{group.categories.join(" • ")}</p>
+                        <h2 className="section-title text-[3rem] md:text-[3.8rem]">{group.title}</h2>
+                      </div>
+                      <p className="max-w-xl text-base leading-8 text-ink/70">{group.description}</p>
                     </div>
-
-                    <div className="grid gap-5 xl:grid-cols-2">
+                    <div className="grid gap-5 2xl:grid-cols-2">
                       {group.items.map((item) => (
-                        <article key={item.name} className="glass-panel p-6">
-                          <div className="mb-5 flex h-28 items-end rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.92))] p-5">
-                            <span className="text-[0.7rem] uppercase tracking-[0.24em] text-olive-700">Placeholder</span>
+                        <article key={item.name} className="menu-card">
+                          <div className="mb-5 flex h-24 items-end rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.45),rgba(255,255,255,0.96))] p-5">
+                            <span className="text-[0.7rem] uppercase tracking-[0.24em] text-olive-700">Menu Item</span>
                           </div>
                           <div className="flex flex-col justify-between">
                             <div>

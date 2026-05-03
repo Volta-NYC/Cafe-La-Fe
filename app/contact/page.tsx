@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
+import { PageHero } from "@/components/PageHero";
 import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
-import { HOURS, SITE } from "@/lib/siteData";
+import { GALLERY_IMAGES, HERO_IMAGES, HOURS, SITE } from "@/lib/siteData";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -33,12 +35,20 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="pt-28 md:pt-32">
+    <main>
+      <PageHero
+        eyebrow="Contact"
+        title="Visit Us in the Heart of the East Village"
+        subtitle="Stop in for coffee and empanadas, ask about catering, or send us a note about your next visit."
+        image={HERO_IMAGES[1].src}
+        alt={HERO_IMAGES[1].alt}
+      />
+
       <section className="section-padding pb-14">
         <div className="section-shell">
           <Reveal>
             <p className="section-kicker">Contact</p>
-            <h1 className="section-title">Plan a visit, ask a question, or say hello.</h1>
+            <h2 className="section-title">Plan a visit, ask a question, or say hello.</h2>
             <p className="section-copy">
               Reach out for catering, collaborations, neighborhood events, or a simple question about the menu.
             </p>
@@ -93,6 +103,11 @@ export default function ContactPage() {
                   ))}
                 </div>
               </div>
+              <div className="glass-panel overflow-hidden">
+                <div className="relative aspect-[4/3]">
+                  <Image src={GALLERY_IMAGES[15].src} alt={GALLERY_IMAGES[15].alt} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 1024px) 28vw, 100vw" />
+                </div>
+              </div>
             </div>
           </Reveal>
 
@@ -118,7 +133,7 @@ export default function ContactPage() {
                     />
                     {errors.message ? <span className="mt-2 block text-xs normal-case tracking-normal text-rose-700">{errors.message}</span> : null}
                   </label>
-                  <button type="submit" className="rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream transition hover:-translate-y-0.5">
+                  <button type="submit" className="rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream shadow-[0_18px_34px_rgba(42,24,16,0.16)] transition hover:-translate-y-0.5">
                     Send Message
                   </button>
                   {submitted ? (
@@ -129,7 +144,7 @@ export default function ContactPage() {
                 </form>
               </div>
 
-              <div className="glass-panel overflow-hidden">
+              <div className="glass-panel overflow-hidden shadow-[0_22px_80px_rgba(42,24,16,0.1)]">
                 <iframe
                   title="Café La Fe map"
                   src="https://www.google.com/maps?q=70+E+1st+St,+New+York,+NY+10003&output=embed"

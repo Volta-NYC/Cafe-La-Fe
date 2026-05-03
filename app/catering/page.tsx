@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { CATERING_FEATURES, EVENT_TYPES, SITE } from "@/lib/siteData";
+import { CATERING_FEATURES, EVENT_TYPES, GALLERY_IMAGES, HERO_IMAGES, SITE } from "@/lib/siteData";
 
 type FormState = {
   name: string;
@@ -55,13 +57,21 @@ export default function CateringPage() {
   }
 
   return (
-    <main className="pt-28 md:pt-32">
+    <main>
+      <PageHero
+        eyebrow="Catering"
+        title="Bring Café La Fe to Your Next Gathering"
+        subtitle="From office breakfasts to family celebrations, we bring thoughtful hospitality, handcrafted favorites, and polished service to the table."
+        image={HERO_IMAGES[2].src}
+        alt={HERO_IMAGES[2].alt}
+      />
+
       <section className="section-padding pb-14">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">
           <Reveal>
             <div>
               <p className="section-kicker">Catering</p>
-              <h1 className="section-title">Bring Café La Fe warmth to the table.</h1>
+              <h2 className="section-title">Bring Café La Fe warmth to the table.</h2>
               <p className="section-copy">
                 Let Café La Fe bring warmth, flavor, and unforgettable hospitality to your next event.
               </p>
@@ -75,7 +85,7 @@ export default function CateringPage() {
             <div className="glass-panel texture-panel min-h-[24rem] rounded-[2.2rem] p-8 md:min-h-[32rem] md:p-10">
               <p className="section-kicker">Service Style</p>
               <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">Flexible catering for creative mornings, office lunches, and community gatherings.</h2>
-              <div className="mt-8 grid gap-4">
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-white/70 p-5">
                   <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Curated Menus</p>
                   <p className="mt-3 text-base leading-8 text-ink/72">Mix drinks, savory favorites, pastries, and sweet finishes based on the event tone and guest count.</p>
@@ -91,7 +101,7 @@ export default function CateringPage() {
       </section>
 
       <section className="section-padding pt-0">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.84fr_1.16fr]">
           <Reveal>
             <div className="space-y-5">
               <div className="glass-panel texture-panel p-8 md:p-10">
@@ -114,6 +124,15 @@ export default function CateringPage() {
                     </div>
                   ))}
                 </div>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {GALLERY_IMAGES.slice(2, 6).map((image) => (
+                  <div key={image.src} className="glass-panel overflow-hidden">
+                    <div className="relative aspect-[4/3]">
+                      <Image src={image.src} alt={image.alt} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 640px) 22vw, 100vw" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </Reveal>
@@ -144,7 +163,7 @@ export default function CateringPage() {
                   </label>
                 </div>
                 <div className="md:col-span-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <button type="submit" className="rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream transition hover:-translate-y-0.5">
+                  <button type="submit" className="rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream shadow-[0_18px_34px_rgba(42,24,16,0.16)] transition hover:-translate-y-0.5">
                     Submit Inquiry
                   </button>
                   <p className="text-sm leading-7 text-ink/58">For immediate questions, call {SITE.phone}.</p>
