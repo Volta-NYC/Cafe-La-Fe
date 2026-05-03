@@ -40,7 +40,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Visit Us in the Heart of the East Village"
         subtitle="Stop in for coffee and empanadas, ask about catering, or send us a note about your next visit."
-        image="/hero6.jpg"
+        image="/hero8.jpg"
         alt="Café La Fe contact hero"
       />
 

@@ -69,14 +69,13 @@ export default function MenuPage() {
         eyebrow="Menu"
         title="Handcrafted Drinks, Fresh Bites, and Daily Favorites"
         subtitle="A full menu of coffee, matcha, bubble tea, empanadas, pastries, and neighborhood staples, organized to be easy to browse and even easier to order."
-        image="/hero5.jpg"
+        image="/hero7.jpg"
         alt="Café La Fe menu hero"
       />
 
       <section className="section-padding">
         <div className="page-shell-wide grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[360px_minmax(0,1fr)]">
-          <Reveal className="hidden lg:block">
-            <aside className="glass-panel sticky top-28 p-6">
+          <aside className="glass-panel sticky top-28 hidden self-start p-6 lg:block">
               <p className="section-kicker">Menu Explorer</p>
               <h2 className="mt-3 font-display text-4xl leading-tight text-ink">Browse by section.</h2>
               <p className="mt-4 text-sm leading-7 text-ink/68">
@@ -144,7 +143,6 @@ export default function MenuPage() {
                 </nav>
               </div>
             </aside>
-          </Reveal>
 
           <div className="lg:hidden">
             <Reveal>
@@ -215,56 +213,56 @@ export default function MenuPage() {
             </div>
 
             <div className="mt-5 space-y-5">
-            {filteredGroups.map((group) => {
-              const open = openMobileSection === group.slug;
+              {filteredGroups.map((group) => {
+                const open = openMobileSection === group.slug;
 
-              return (
-                <Reveal key={group.slug}>
-                  <div className="glass-panel overflow-hidden">
-                    <button
-                      type="button"
-                      onClick={() => setOpenMobileSection((current) => (current === group.slug ? "" : group.slug))}
-                      className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
-                    >
-                      <div>
-                        <p className="font-display text-3xl">{group.title}</p>
-                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-olive-700">{group.categories.join(" • ")}</p>
-                      </div>
-                      <span className="text-2xl text-ink/60">{open ? "−" : "+"}</span>
-                    </button>
+                return (
+                  <Reveal key={group.slug}>
+                    <div className="glass-panel overflow-hidden">
+                      <button
+                        type="button"
+                        onClick={() => setOpenMobileSection((current) => (current === group.slug ? "" : group.slug))}
+                        className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
+                      >
+                        <div>
+                          <p className="font-display text-3xl">{group.title}</p>
+                          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-olive-700">{group.categories.join(" • ")}</p>
+                        </div>
+                        <span className="text-2xl text-ink/60">{open ? "−" : "+"}</span>
+                      </button>
 
-                    <AnimatePresence initial={false}>
-                      {open ? (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="grid gap-4 px-5 pb-5">
-                            {group.items.map((item) => (
-                              <article key={item.name} className="rounded-[1.6rem] border border-olive-100 bg-white p-4">
-                                <div className="mb-4 flex h-24 items-end rounded-[1.2rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.95))] p-4">
-                                  <span className="text-[0.68rem] uppercase tracking-[0.24em] text-olive-700">Menu Item</span>
-                                </div>
-                                <div className="flex items-start justify-between gap-4">
-                                  <div>
-                                    <h2 className="text-2xl leading-none">{item.name}</h2>
-                                    <p className="mt-2 text-xs uppercase tracking-[0.18em] text-olive-700">{item.originalCategory}</p>
+                      <AnimatePresence initial={false}>
+                        {open ? (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="grid gap-4 px-5 pb-5">
+                              {group.items.map((item) => (
+                                <article key={item.name} className="rounded-[1.6rem] border border-olive-100 bg-white p-4">
+                                  <div className="mb-4 flex h-24 items-end rounded-[1.2rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.95))] p-4">
+                                    <span className="text-[0.68rem] uppercase tracking-[0.24em] text-olive-700">Menu Item</span>
                                   </div>
-                                  <span className="rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.16em] text-olive-800">{item.price}</span>
-                                </div>
-                                <p className="mt-3 text-sm leading-7 text-ink/68">{item.description}</p>
-                              </article>
-                            ))}
-                          </div>
-                        </motion.div>
-                      ) : null}
-                    </AnimatePresence>
-                  </div>
-                </Reveal>
-              );
-            })}
+                                  <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                      <h2 className="text-2xl leading-none">{item.name}</h2>
+                                      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-olive-700">{item.originalCategory}</p>
+                                    </div>
+                                    <span className="rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.16em] text-olive-800">{item.price}</span>
+                                  </div>
+                                  <p className="mt-3 text-sm leading-7 text-ink/68">{item.description}</p>
+                                </article>
+                              ))}
+                            </div>
+                          </motion.div>
+                        ) : null}
+                      </AnimatePresence>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
 
