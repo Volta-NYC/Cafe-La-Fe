@@ -1,6 +1,6 @@
-# Pulse Coffee Website
+# Café La Fe Website
 
-Next.js + TypeScript + Tailwind scaffold for the Pulse Coffee website.
+Premium Next.js + TypeScript + Tailwind website for Café La Fe in New York City's East Village.
 
 ## Getting Started
 

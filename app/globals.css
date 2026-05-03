@@ -67,7 +67,8 @@
   }
 
   .section-copy {
-    @apply mt-5 max-w-2xl text-base leading-8 text-ink/72 md:text-lg;
+    @apply mt-5 max-w-2xl text-base leading-8 md:text-lg;
+    color: rgba(42, 24, 16, 0.72);
   }
 
   .glass-panel {
