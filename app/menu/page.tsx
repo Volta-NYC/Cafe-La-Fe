@@ -64,7 +64,7 @@ export default function MenuPage() {
   }, [filteredGroups]);
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <PageHero
         eyebrow="Menu"
         title="Handcrafted Drinks, Fresh Bites, and Daily Favorites"
@@ -75,7 +75,7 @@ export default function MenuPage() {
       />
 
       <section className="section-padding">
-        <div className="page-shell-wide grid gap-5 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[360px_minmax(0,1fr)]">
+        <div className="page-shell-wide max-w-full grid gap-5 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[360px_minmax(0,1fr)]">
           <aside className="glass-panel sticky top-28 hidden self-start p-6 lg:block">
               <p className="section-kicker">Menu Explorer</p>
               <h2 className="mt-3 font-display text-4xl leading-tight text-ink">Browse by section.</h2>
@@ -125,9 +125,9 @@ export default function MenuPage() {
               </div>
             </aside>
 
-          <div className="lg:hidden">
+          <div className="min-w-0 lg:hidden">
             <Reveal>
-              <div className="glass-panel p-4 md:p-5">
+              <div className="glass-panel w-full max-w-full p-4 md:p-5">
                 <p className="section-kicker">Menu Explorer</p>
                 <h2 className="section-title text-[2.2rem] sm:text-[2.6rem]">Search the full Café La Fe menu.</h2>
                 <p className="section-copy max-w-3xl">
@@ -177,14 +177,14 @@ export default function MenuPage() {
               </div>
             </Reveal>
 
-            <div className="sticky top-[5.4rem] z-20 -mx-4 border-y border-olive-100/70 bg-cream/95 px-4 py-3 backdrop-blur md:top-[6rem] lg:hidden">
-              <div className="no-scrollbar overflow-x-auto">
-                <div className="flex min-w-max gap-3">
+            <div className="sticky top-[5.4rem] z-20 -mx-4 overflow-hidden border-y border-olive-100/70 bg-cream/95 px-4 py-3 backdrop-blur md:top-[6rem] lg:hidden">
+              <div className="no-scrollbar w-full overflow-x-auto overflow-y-hidden">
+                <div className="flex w-max gap-3 pr-4">
                 {filteredGroups.map((group) => (
                   <a
                     key={group.slug}
                     href={`#${groupId(group)}`}
-                    className={`inline-flex min-h-11 items-center rounded-full px-4 py-2 text-xs uppercase tracking-[0.18em] transition ${
+                    className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-4 py-2 text-[0.68rem] uppercase tracking-[0.16em] whitespace-nowrap transition ${
                       activeSection === group.slug ? "bg-ink text-cream" : "bg-white text-ink/75 ring-1 ring-olive-100"
                     }`}
                   >
@@ -201,17 +201,19 @@ export default function MenuPage() {
 
                 return (
                   <Reveal key={group.slug}>
-                    <div className="glass-panel overflow-hidden">
+                    <div className="glass-panel w-full max-w-full overflow-hidden">
                       <button
                         type="button"
                         onClick={() => setOpenMobileSection((current) => (current === group.slug ? "" : group.slug))}
-                        className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
+                        className="flex w-full min-w-0 items-center justify-between gap-4 px-4 py-4 text-left sm:px-5 sm:py-5"
                       >
-                        <div>
-                          <p className="font-display text-3xl">{group.title}</p>
-                          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-olive-700">{group.categories.join(" • ")}</p>
+                        <div className="min-w-0">
+                          <p className="font-display text-[1.75rem] leading-tight sm:text-3xl">{group.title}</p>
+                          <p className="mt-1 text-[0.68rem] uppercase tracking-[0.14em] text-olive-700 sm:text-xs sm:tracking-[0.18em]">
+                            {group.categories.join(" • ")}
+                          </p>
                         </div>
-                        <span className="text-2xl text-ink/60">{open ? "−" : "+"}</span>
+                        <span className="shrink-0 text-2xl text-ink/60">{open ? "−" : "+"}</span>
                       </button>
 
                       <AnimatePresence initial={false}>
@@ -222,20 +224,20 @@ export default function MenuPage() {
                             exit={{ height: 0, opacity: 0 }}
                             className="overflow-hidden"
                           >
-                            <div className="grid gap-4 px-5 pb-5">
+                            <div className="grid gap-4 px-4 pb-4 sm:px-5 sm:pb-5">
                               {group.items.map((item) => (
-                              <article key={item.name} className="rounded-[1.35rem] border border-olive-100 bg-white p-4 sm:rounded-[1.6rem]">
-                                  <div className="mb-4 flex h-20 items-end rounded-[1rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.95))] p-4 sm:h-24 sm:rounded-[1.2rem]">
+                              <article key={item.name} className="min-w-0 rounded-[1.2rem] border border-olive-100 bg-white p-4 sm:rounded-[1.6rem]">
+                                  <div className="mb-4 flex h-16 items-end rounded-[1rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.95))] p-4 sm:h-24 sm:rounded-[1.2rem]">
                                     <span className="text-[0.68rem] uppercase tracking-[0.24em] text-olive-700">Menu Item</span>
                                   </div>
-                                  <div className="flex items-start justify-between gap-4">
-                                    <div>
-                                      <h2 className="text-xl leading-tight sm:text-2xl sm:leading-none">{item.name}</h2>
-                                      <p className="mt-2 text-xs uppercase tracking-[0.18em] text-olive-700">{item.originalCategory}</p>
+                                  <div className="flex min-w-0 items-start justify-between gap-3">
+                                    <div className="min-w-0">
+                                      <h2 className="break-words text-lg leading-tight sm:text-2xl sm:leading-none">{item.name}</h2>
+                                      <p className="mt-2 text-[0.68rem] uppercase tracking-[0.14em] text-olive-700 sm:text-xs sm:tracking-[0.18em]">{item.originalCategory}</p>
                                     </div>
-                                    <span className="shrink-0 rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.16em] text-olive-800">{item.price}</span>
+                                    <span className="shrink-0 rounded-full bg-olive-100 px-3 py-1 text-[0.68rem] uppercase tracking-[0.14em] text-olive-800 sm:text-xs sm:tracking-[0.16em]">{item.price}</span>
                                   </div>
-                                  <p className="mt-3 text-sm leading-7 text-ink/68">{item.description}</p>
+                                  <p className="mt-3 break-words text-sm leading-6 text-ink/68 sm:leading-7">{item.description}</p>
                                 </article>
                               ))}
                             </div>
