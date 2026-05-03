@@ -10,9 +10,10 @@ type PageHeroProps = {
   image: string;
   alt: string;
   eyebrow?: string;
+  ambientFloat?: boolean;
 };
 
-export function PageHero({ title, subtitle, image, alt, eyebrow }: PageHeroProps) {
+export function PageHero({ title, subtitle, image, alt, eyebrow, ambientFloat = false }: PageHeroProps) {
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
@@ -24,7 +25,20 @@ export function PageHero({ title, subtitle, image, alt, eyebrow }: PageHeroProps
 
   return (
     <section ref={ref} className="relative min-h-[74vh] overflow-hidden px-4 pt-28 md:min-h-[82vh] md:px-6 md:pt-32">
-      <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
+      <motion.div
+        className="absolute inset-0"
+        style={{ scale: imageScale, y: imageY }}
+        animate={
+          ambientFloat && !prefersReducedMotion
+            ? { translateY: [0, -10, 0, 10, 0] }
+            : undefined
+        }
+        transition={
+          ambientFloat && !prefersReducedMotion
+            ? { duration: 18, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }
+            : undefined
+        }
+      >
         <Image src={image} alt={alt} fill priority className="object-cover" sizes="100vw" />
       </motion.div>
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,10,8,0.2),rgba(15,10,8,0.62)),radial-gradient(circle_at_top,rgba(255,242,224,0.16),transparent_36%)]" />

@@ -71,6 +71,7 @@ export default function MenuPage() {
         subtitle="A full menu of coffee, matcha, bubble tea, empanadas, pastries, and neighborhood staples, organized to be easy to browse and even easier to order."
         image="/hero7.jpg"
         alt="Café La Fe menu hero"
+        ambientFloat
       />
 
       <section className="section-padding">
@@ -119,28 +120,8 @@ export default function MenuPage() {
                 <p className="text-sm leading-7 text-ink/60">
                   {query || activeFilter !== "all"
                     ? `${filteredGroups.reduce((total, group) => total + group.items.length, 0)} results found.`
-                    : "Use the buttons below to jump between sections."}
+                    : "Use these controls to explore the full menu."}
                 </p>
-              </div>
-
-              <div className="mt-7 border-t border-olive-100 pt-6">
-                <p className="text-xs uppercase tracking-[0.28em] text-olive-700">Jump To</p>
-                <nav className="mt-4 flex flex-col gap-2">
-                  {filteredGroups.map((group) => (
-                    <a
-                      key={group.slug}
-                      href={`#${groupId(group)}`}
-                      className={`rounded-2xl px-4 py-3 text-sm leading-6 transition ${
-                        activeSection === group.slug
-                          ? "bg-olive-100 text-ink shadow-[inset_0_0_0_1px_rgba(74,107,88,0.14)]"
-                          : "text-ink/74 hover:bg-olive-50 hover:text-ink"
-                      }`}
-                    >
-                      <span className="block font-medium text-ink">{group.title}</span>
-                      <span className="block text-xs uppercase tracking-[0.16em] text-olive-700">{group.categories.join(" • ")}</span>
-                    </a>
-                  ))}
-                </nav>
               </div>
             </aside>
 

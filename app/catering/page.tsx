@@ -64,6 +64,7 @@ export default function CateringPage() {
         subtitle="From office breakfasts to family celebrations, we bring thoughtful hospitality, handcrafted favorites, and polished service to the table."
         image={HERO_IMAGES[2].src}
         alt={HERO_IMAGES[2].alt}
+        ambientFloat
       />
 
       <section className="section-padding pb-14">
