@@ -99,7 +99,22 @@ export default function HomePage() {
 
           <Reveal delay={0.08}>
             <div className="mt-8 glass-panel p-4 md:p-6 lg:mt-10">
-              <div className="columns-1 gap-3 sm:columns-2 md:columns-3 xl:columns-4">
+              <div className="grid grid-cols-2 gap-3 sm:hidden">
+                {GALLERY_IMAGES.map((image) => (
+                  <div key={image.src} className="overflow-hidden rounded-[1.2rem]">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-[1.2rem] bg-olive-50">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className="object-cover transition duration-500"
+                        sizes="50vw"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="hidden gap-3 sm:block sm:columns-2 md:columns-3 xl:columns-4">
                 {GALLERY_IMAGES.map((image, index) => (
                   <div key={image.src} className={`mb-3 break-inside-avoid overflow-hidden rounded-[1.5rem] sm:mb-4 sm:rounded-[1.7rem] ${index % 5 === 0 ? "md:mt-8" : ""}`}>
                     <div className="relative min-h-[13rem] overflow-hidden rounded-[1.5rem] bg-olive-50 sm:min-h-[14rem] sm:rounded-[1.7rem]">

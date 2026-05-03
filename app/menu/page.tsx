@@ -249,7 +249,7 @@ export default function MenuPage() {
             </div>
           </div>
 
-          <div className="space-y-12">
+          <div className="hidden space-y-12 lg:block">
             {filteredGroups.length === 0 ? (
               <Reveal>
                 <div className="glass-panel p-10">
