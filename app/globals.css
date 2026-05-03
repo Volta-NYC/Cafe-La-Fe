@@ -18,7 +18,7 @@
   body {
     margin: 0;
     min-height: 100vh;
-    font-family: var(--font-body), sans-serif;
+    font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     background:
       radial-gradient(circle at top left, rgba(143, 109, 58, 0.15), transparent 26%),
       radial-gradient(circle at top right, rgba(63, 103, 84, 0.12), transparent 20%),
@@ -30,7 +30,7 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-display), serif;
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
     margin: 0;
     letter-spacing: -0.02em;
   }
@@ -84,6 +84,6 @@
 
 @layer utilities {
   .font-display {
-    font-family: var(--font-display), serif;
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   }
 }
