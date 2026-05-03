@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
-import { GALLERY_IMAGES, HERO_IMAGES, HOURS, SITE } from "@/lib/siteData";
+import { GALLERY_IMAGES, HOURS, SITE } from "@/lib/siteData";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -40,8 +40,8 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Visit Us in the Heart of the East Village"
         subtitle="Stop in for coffee and empanadas, ask about catering, or send us a note about your next visit."
-        image={HERO_IMAGES[1].src}
-        alt={HERO_IMAGES[1].alt}
+        image="/hero6.jpg"
+        alt="Café La Fe contact hero"
       />
 
       <section className="section-padding pb-14">

@@ -4,7 +4,7 @@ import { startTransition, useDeferredValue, useEffect, useMemo, useState } from 
 import { AnimatePresence, motion } from "framer-motion";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { HERO_IMAGES, MENU_GROUPS, MENU_SEARCH_HINTS, type MenuGroup } from "@/lib/siteData";
+import { MENU_GROUPS, MENU_SEARCH_HINTS, type MenuGroup } from "@/lib/siteData";
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -69,24 +69,22 @@ export default function MenuPage() {
         eyebrow="Menu"
         title="Handcrafted Drinks, Fresh Bites, and Daily Favorites"
         subtitle="A full menu of coffee, matcha, bubble tea, empanadas, pastries, and neighborhood staples, organized to be easy to browse and even easier to order."
-        image={HERO_IMAGES[3].src}
-        alt={HERO_IMAGES[3].alt}
+        image="/hero5.jpg"
+        alt="Café La Fe menu hero"
       />
 
-      <section className="section-padding pb-10">
-        <div className="page-shell-wide">
-          <Reveal>
-            <p className="section-kicker">Menu Explorer</p>
-            <h2 className="section-title">Search the full Café La Fe menu.</h2>
-            <p className="section-copy max-w-3xl">
-              Browse by section, filter by menu group, and search by item name or flavor. The layout stays text-first so the menu is easier to scan and maintain.
-            </p>
-          </Reveal>
+      <section className="section-padding">
+        <div className="page-shell-wide grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[360px_minmax(0,1fr)]">
+          <Reveal className="hidden lg:block">
+            <aside className="glass-panel sticky top-28 p-6">
+              <p className="section-kicker">Menu Explorer</p>
+              <h2 className="mt-3 font-display text-4xl leading-tight text-ink">Browse by section.</h2>
+              <p className="mt-4 text-sm leading-7 text-ink/68">
+                Search the menu, filter the groups, or jump directly into a category from the left.
+              </p>
 
-          <Reveal delay={0.08}>
-            <div className="glass-panel mt-10 p-4 md:p-5">
-              <div className="flex flex-col gap-4">
-                <label className="relative block lg:w-[28rem]">
+              <div className="mt-6 space-y-4">
+                <label className="relative block">
                   <span className="sr-only">Search menu</span>
                   <input
                     value={query}
@@ -99,17 +97,17 @@ export default function MenuPage() {
                   />
                 </label>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {filters.map((filter) => {
                     const selected = activeFilter === filter;
-                    const label = filter === "all" ? "All Sections" : MENU_GROUPS.find((group) => group.slug === filter)?.title ?? filter;
+                    const label = filter === "all" ? "All" : MENU_GROUPS.find((group) => group.slug === filter)?.title ?? filter;
 
                     return (
                       <button
                         key={filter}
                         type="button"
                         onClick={() => setActiveFilter(filter)}
-                        className={`rounded-full px-4 py-2 text-xs uppercase tracking-[0.18em] transition ${
+                        className={`rounded-full px-3 py-2 text-[0.68rem] uppercase tracking-[0.18em] transition ${
                           selected ? "bg-ink text-cream" : "bg-white text-ink/72 ring-1 ring-olive-100 hover:bg-olive-50"
                         }`}
                       >
@@ -122,40 +120,85 @@ export default function MenuPage() {
                 <p className="text-sm leading-7 text-ink/60">
                   {query || activeFilter !== "all"
                     ? `${filteredGroups.reduce((total, group) => total + group.items.length, 0)} results found.`
-                    : "Browse by section, search by name, or narrow with filters."}
+                    : "Use the buttons below to jump between sections."}
                 </p>
               </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
-      <section className="section-padding pt-0">
-        <div className="page-shell-wide grid gap-8 xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-10">
-          <Reveal className="hidden lg:block">
-            <aside className="glass-panel sticky top-28 p-5 xl:block">
-              <p className="text-xs uppercase tracking-[0.28em] text-olive-700">Sections</p>
-              <nav className="mt-5 flex flex-col gap-2">
-                {filteredGroups.map((group) => (
-                  <a
-                    key={group.slug}
-                    href={`#${groupId(group)}`}
-                    className={`rounded-2xl px-4 py-3 text-sm leading-6 transition ${
-                      activeSection === group.slug
-                        ? "bg-olive-100 text-ink shadow-[inset_0_0_0_1px_rgba(74,107,88,0.14)]"
-                        : "text-ink/74 hover:bg-olive-50 hover:text-ink"
-                    }`}
-                  >
-                    <span className="block font-medium text-ink">{group.title}</span>
-                    <span className="block text-xs uppercase tracking-[0.16em] text-olive-700">{group.categories.join(" • ")}</span>
-                  </a>
-                ))}
-              </nav>
+              <div className="mt-7 border-t border-olive-100 pt-6">
+                <p className="text-xs uppercase tracking-[0.28em] text-olive-700">Jump To</p>
+                <nav className="mt-4 flex flex-col gap-2">
+                  {filteredGroups.map((group) => (
+                    <a
+                      key={group.slug}
+                      href={`#${groupId(group)}`}
+                      className={`rounded-2xl px-4 py-3 text-sm leading-6 transition ${
+                        activeSection === group.slug
+                          ? "bg-olive-100 text-ink shadow-[inset_0_0_0_1px_rgba(74,107,88,0.14)]"
+                          : "text-ink/74 hover:bg-olive-50 hover:text-ink"
+                      }`}
+                    >
+                      <span className="block font-medium text-ink">{group.title}</span>
+                      <span className="block text-xs uppercase tracking-[0.16em] text-olive-700">{group.categories.join(" • ")}</span>
+                    </a>
+                  ))}
+                </nav>
+              </div>
             </aside>
           </Reveal>
 
-          <div className="space-y-5 xl:hidden">
-            <div className="no-scrollbar -mx-1 overflow-x-auto pb-1">
+          <div className="lg:hidden">
+            <Reveal>
+              <div className="glass-panel p-4 md:p-5">
+                <p className="section-kicker">Menu Explorer</p>
+                <h2 className="section-title text-[2.6rem]">Search the full Café La Fe menu.</h2>
+                <p className="section-copy max-w-3xl">
+                  Browse by section, filter by menu group, and search by item name or flavor.
+                </p>
+
+                <div className="mt-6 flex flex-col gap-4">
+                  <label className="relative block">
+                    <span className="sr-only">Search menu</span>
+                    <input
+                      value={query}
+                      onChange={(event) => {
+                        const next = event.target.value;
+                        startTransition(() => setQuery(next));
+                      }}
+                      placeholder={`Search for ${MENU_SEARCH_HINTS[0]}, ${MENU_SEARCH_HINTS[1]}, ${MENU_SEARCH_HINTS[4]}...`}
+                      className="h-14 w-full rounded-full border border-olive-100 bg-white px-6 text-sm text-ink outline-none ring-0 placeholder:text-ink/40 focus:border-olive-300"
+                    />
+                  </label>
+
+                  <div className="flex flex-wrap gap-2">
+                    {filters.map((filter) => {
+                      const selected = activeFilter === filter;
+                      const label = filter === "all" ? "All" : MENU_GROUPS.find((group) => group.slug === filter)?.title ?? filter;
+
+                      return (
+                        <button
+                          key={filter}
+                          type="button"
+                          onClick={() => setActiveFilter(filter)}
+                          className={`rounded-full px-3 py-2 text-[0.68rem] uppercase tracking-[0.18em] transition ${
+                            selected ? "bg-ink text-cream" : "bg-white text-ink/72 ring-1 ring-olive-100 hover:bg-olive-50"
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <p className="text-sm leading-7 text-ink/60">
+                    {query || activeFilter !== "all"
+                      ? `${filteredGroups.reduce((total, group) => total + group.items.length, 0)} results found.`
+                      : "Tap a section button below or expand a group to browse."}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            <div className="no-scrollbar mt-5 -mx-1 overflow-x-auto pb-1">
               <div className="flex min-w-max gap-3 px-1">
                 {filteredGroups.map((group) => (
                   <a
@@ -170,6 +213,8 @@ export default function MenuPage() {
                 ))}
               </div>
             </div>
+
+            <div className="mt-5 space-y-5">
             {filteredGroups.map((group) => {
               const open = openMobileSection === group.slug;
 
@@ -220,9 +265,10 @@ export default function MenuPage() {
                 </Reveal>
               );
             })}
+            </div>
           </div>
 
-          <div className="hidden space-y-12 xl:block">
+          <div className="space-y-12">
             {filteredGroups.length === 0 ? (
               <Reveal>
                 <div className="glass-panel p-10">
@@ -241,7 +287,7 @@ export default function MenuPage() {
                       </div>
                       <p className="max-w-xl text-base leading-8 text-ink/70">{group.description}</p>
                     </div>
-                    <div className="grid gap-5 2xl:grid-cols-2">
+                    <div className="grid gap-5 xl:grid-cols-2">
                       {group.items.map((item) => (
                         <article key={item.name} className="menu-card">
                           <div className="mb-5 flex h-24 items-end rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.45),rgba(255,255,255,0.96))] p-5">
