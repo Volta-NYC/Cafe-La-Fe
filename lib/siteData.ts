@@ -15,6 +15,7 @@ export const SITE = {
   cityStateZip: "New York, NY 10003",
   mapsUrl: "https://www.google.com/maps?q=70+E+1st+St,+New+York,+NY+10003",
   instagram: "https://www.instagram.com/cafelafenyc/",
+  yelp: "https://www.yelp.com/biz/cafe-la-fe-new-york",
   orderUrl: ORDER_URL,
 } as const;
 
