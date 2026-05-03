@@ -67,7 +67,7 @@ export default function CateringPage() {
         ambientFloat
       />
 
-      <section className="section-padding pb-14">
+      <section className="section-padding pb-10 lg:pb-14">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.96fr_1.04fr] lg:items-end">
           <Reveal>
             <div>
@@ -83,10 +83,10 @@ export default function CateringPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="glass-panel texture-panel min-h-[24rem] rounded-[2.2rem] p-8 md:min-h-[32rem] md:p-10">
+            <div className="glass-panel texture-panel min-h-[20rem] rounded-[1.8rem] p-6 md:min-h-[24rem] md:rounded-[2.2rem] md:p-8 lg:min-h-[32rem] lg:p-10">
               <p className="section-kicker">Service Style</p>
-              <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">Flexible catering for creative mornings, office lunches, and community gatherings.</h2>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <h2 className="mt-4 font-display text-[2.1rem] leading-tight md:text-4xl lg:text-5xl">Flexible catering for creative mornings, office lunches, and community gatherings.</h2>
+              <div className="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-2">
                 <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-white/70 p-5">
                   <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Curated Menus</p>
                   <p className="mt-3 text-base leading-8 text-ink/72">Mix drinks, savory favorites, pastries, and sweet finishes based on the event tone and guest count.</p>
@@ -105,7 +105,7 @@ export default function CateringPage() {
         <div className="section-shell grid gap-8 lg:grid-cols-[0.84fr_1.16fr]">
           <Reveal>
             <div className="space-y-5">
-              <div className="glass-panel texture-panel p-8 md:p-10">
+              <div className="glass-panel texture-panel p-6 md:p-8 lg:p-10">
                 <p className="section-kicker">Why It Works</p>
                 <div className="mt-6 space-y-4">
                   {CATERING_FEATURES.map((feature) => (
@@ -116,7 +116,7 @@ export default function CateringPage() {
                 </div>
               </div>
 
-              <div className="glass-panel p-8 md:p-10">
+              <div className="glass-panel p-6 md:p-8 lg:p-10">
                 <p className="section-kicker">Perfect For</p>
                 <div className="mt-6 grid gap-3">
                   {EVENT_TYPES.map((type) => (
@@ -139,14 +139,14 @@ export default function CateringPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="glass-panel p-8 md:p-10">
+            <div className="glass-panel p-6 md:p-8 lg:p-10">
               <p className="section-kicker">Inquiry Form</p>
               <h2 className="mt-3 font-display text-5xl">Plan your event</h2>
               <p className="mt-4 max-w-2xl text-base leading-8 text-ink/70">
                 Share the basics and we will shape the right mix of drinks, savory favorites, and sweet touches.
               </p>
 
-              <form onSubmit={handleSubmit} className="mt-8 grid gap-4 md:grid-cols-2">
+              <form onSubmit={handleSubmit} className="mt-8 grid gap-5 md:grid-cols-2">
                 <Field label="Name *" value={form.name} error={errors.name} onChange={(value) => setForm((current) => ({ ...current, name: value }))} />
                 <Field label="Email *" type="email" value={form.email} error={errors.email} onChange={(value) => setForm((current) => ({ ...current, email: value }))} />
                 <Field label="Phone" value={form.phone} onChange={(value) => setForm((current) => ({ ...current, phone: value }))} />
@@ -164,7 +164,7 @@ export default function CateringPage() {
                   </label>
                 </div>
                 <div className="md:col-span-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <button type="submit" className="rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream shadow-[0_18px_34px_rgba(42,24,16,0.16)] transition hover:-translate-y-0.5">
+                  <button type="submit" className="inline-flex min-h-14 items-center justify-center rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream shadow-[0_18px_34px_rgba(42,24,16,0.16)] transition hover:-translate-y-0.5">
                     Submit Inquiry
                   </button>
                   <p className="text-sm leading-7 text-ink/58">For immediate questions, call {SITE.phone}.</p>
@@ -204,7 +204,7 @@ function Field({
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className={`mt-3 h-14 w-full rounded-full border bg-white px-5 text-base text-ink outline-none transition ${
+        className={`mt-3 h-14 w-full rounded-full border bg-white px-5 text-base text-ink outline-none transition touch-manipulation ${
           error ? "border-rose-300" : "border-olive-100 focus:border-olive-300"
         }`}
       />

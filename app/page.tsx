@@ -17,14 +17,14 @@ export default function HomePage() {
 
   return (
     <main className="overflow-hidden">
-      <section className="relative min-h-screen px-4 pb-12 pt-28 md:px-6 md:pt-32">
+      <section className="relative min-h-[88vh] px-4 pb-10 pt-24 md:px-6 md:pt-28 lg:min-h-screen lg:pb-12 lg:pt-32">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,247,235,0.28),transparent_34%),linear-gradient(180deg,rgba(29,20,16,0.2),rgba(29,20,16,0.58))]" />
           <motion.div style={{ scale: heroScale }} className="absolute inset-0">
             <motion.div style={{ y: heroOneY }} className="absolute left-[3%] top-20 hidden h-[72vh] w-[20vw] min-w-[200px] overflow-hidden rounded-[2.8rem] shadow-[0_40px_100px_rgba(0,0,0,0.3)] lg:block">
               <Image src={HERO_IMAGES[0].src} alt={HERO_IMAGES[0].alt} fill className="object-cover" priority sizes="20vw" />
             </motion.div>
-            <motion.div style={{ y: heroTwoY }} className="absolute left-1/2 top-0 h-[78vh] w-[58vw] -translate-x-1/2 overflow-hidden rounded-[2.8rem] shadow-[0_40px_120px_rgba(0,0,0,0.35)] md:h-[84vh] lg:w-[28vw]">
+            <motion.div style={{ y: heroTwoY }} className="absolute left-1/2 top-4 h-[68vh] w-[84vw] -translate-x-1/2 overflow-hidden rounded-[2.2rem] shadow-[0_40px_120px_rgba(0,0,0,0.35)] md:top-2 md:h-[72vh] md:w-[68vw] md:rounded-[2.5rem] lg:top-0 lg:h-[84vh] lg:w-[28vw] lg:rounded-[2.8rem]">
               <Image src={HERO_IMAGES[1].src} alt={HERO_IMAGES[1].alt} fill className="object-cover" priority sizes="(min-width: 1024px) 28vw, 58vw" />
             </motion.div>
             <motion.div style={{ y: heroThreeY }} className="absolute right-[24%] top-28 hidden h-[66vh] w-[18vw] min-w-[190px] overflow-hidden rounded-[2.8rem] shadow-[0_40px_100px_rgba(0,0,0,0.32)] xl:block">
@@ -37,13 +37,13 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,14,0.68),rgba(27,18,14,0.16),rgba(27,18,14,0.5))]" />
         </div>
 
-        <div className="section-shell relative z-10 flex min-h-[82vh] items-end">
-          <div className="max-w-3xl pb-10 text-white md:pb-20">
+        <div className="section-shell relative z-10 flex min-h-[74vh] items-end md:min-h-[76vh] lg:min-h-[82vh]">
+          <div className="max-w-3xl pb-8 text-white md:pb-16 lg:pb-20">
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="text-sm uppercase tracking-[0.34em] text-white/75"
+              className="text-[0.7rem] uppercase tracking-[0.28em] text-white/75 md:text-sm md:tracking-[0.34em]"
             >
               East Village, New York City
             </motion.p>
@@ -51,7 +51,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 0.1 }}
-              className="mt-5 font-display text-5xl leading-[0.93] md:text-7xl lg:text-[5.8rem]"
+              className="mt-4 max-w-[14ch] font-display text-[2.9rem] leading-[0.95] md:mt-5 md:max-w-[12ch] md:text-6xl lg:text-[5.8rem]"
             >
               Café, Community, and Culture in the Heart of the East Village
             </motion.h1>
@@ -59,7 +59,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mt-6 max-w-2xl text-lg leading-8 text-white/82 md:text-xl"
+              className="mt-4 max-w-xl text-base leading-7 text-white/82 md:mt-5 md:max-w-2xl md:text-lg md:leading-8 lg:mt-6 lg:text-xl"
             >
               Organic coffee, handcrafted empanadas, specialty matcha, bubble tea, and warm hospitality.
             </motion.p>
@@ -67,16 +67,16 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mt-10 flex flex-wrap gap-4"
+              className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:mt-10"
             >
-              <Link href="/menu" className="rounded-full bg-cream px-7 py-4 text-sm uppercase tracking-[0.18em] text-ink transition hover:-translate-y-0.5">
+              <Link href="/menu" className="inline-flex min-h-14 items-center justify-center rounded-full bg-cream px-7 py-4 text-sm uppercase tracking-[0.18em] text-ink transition hover:-translate-y-0.5 sm:w-auto">
                 View Menu
               </Link>
               <a
                 href={ORDER_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-white/35 bg-white/10 px-7 py-4 text-sm uppercase tracking-[0.18em] text-white transition hover:-translate-y-0.5 hover:bg-white/16"
+                className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/35 bg-white/10 px-7 py-4 text-sm uppercase tracking-[0.18em] text-white transition hover:-translate-y-0.5 hover:bg-white/16 sm:w-auto"
               >
                 Order Online
               </a>
@@ -98,11 +98,11 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="mt-10 glass-panel p-5 md:p-6">
-              <div className="columns-2 gap-4 md:columns-3 xl:columns-4">
+            <div className="mt-8 glass-panel p-4 md:p-6 lg:mt-10">
+              <div className="columns-1 gap-3 sm:columns-2 md:columns-3 xl:columns-4">
                 {GALLERY_IMAGES.map((image, index) => (
-                  <div key={image.src} className={`mb-4 break-inside-avoid overflow-hidden rounded-[1.7rem] ${index % 5 === 0 ? "md:mt-8" : ""}`}>
-                    <div className="relative min-h-[14rem] overflow-hidden rounded-[1.7rem] bg-olive-50">
+                  <div key={image.src} className={`mb-3 break-inside-avoid overflow-hidden rounded-[1.5rem] sm:mb-4 sm:rounded-[1.7rem] ${index % 5 === 0 ? "md:mt-8" : ""}`}>
+                    <div className="relative min-h-[13rem] overflow-hidden rounded-[1.5rem] bg-olive-50 sm:min-h-[14rem] sm:rounded-[1.7rem]">
                       <Image
                         src={image.src}
                         alt={image.alt}
@@ -126,16 +126,16 @@ export default function HomePage() {
             <p className="section-kicker">Popular Favorites</p>
             <h2 className="section-title">The items people come back for.</h2>
           </Reveal>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5 lg:mt-10 lg:gap-5">
             {FAVORITES.map((item, index) => (
               <Reveal key={item.name} delay={index * 0.05}>
-                <article className="glass-panel texture-panel p-6">
-                  <div className="mb-6 flex h-32 items-end rounded-[1.6rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.85))] p-5">
+                <article className="glass-panel texture-panel p-5 lg:p-6">
+                  <div className="mb-5 flex h-28 items-end rounded-[1.4rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.85))] p-4 lg:mb-6 lg:h-32 lg:rounded-[1.6rem] lg:p-5">
                     <span className="text-xs uppercase tracking-[0.28em] text-olive-700">Menu Highlight</span>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="text-2xl leading-tight">{item.name}</h3>
+                      <h3 className="text-xl leading-tight sm:text-2xl">{item.name}</h3>
                       <span className="rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.18em] text-olive-800">{item.price}</span>
                     </div>
                     <p className="text-sm leading-7 text-ink/70">{item.description}</p>
@@ -176,11 +176,11 @@ export default function HomePage() {
             <p className="section-kicker">Testimonials</p>
             <h2 className="section-title">Made memorable by the feeling as much as the menu.</h2>
           </Reveal>
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 lg:mt-10 lg:grid-cols-3 lg:gap-5">
             {TESTIMONIALS.map((testimonial, index) => (
               <Reveal key={testimonial.author} delay={index * 0.06}>
-                <article className="glass-panel texture-panel h-full p-8">
-                  <p className="text-lg leading-8 text-ink/78">&ldquo;{testimonial.quote}&rdquo;</p>
+                <article className="glass-panel texture-panel h-full p-6 lg:p-8">
+                  <p className="text-base leading-7 text-ink/78 lg:text-lg lg:leading-8">&ldquo;{testimonial.quote}&rdquo;</p>
                   <p className="mt-6 text-sm uppercase tracking-[0.18em] text-olive-700">{testimonial.author}</p>
                 </article>
               </Reveal>
@@ -192,11 +192,11 @@ export default function HomePage() {
       <section className="section-padding pt-0">
         <div className="section-shell">
           <Reveal>
-            <div className="glass-panel texture-panel overflow-hidden rounded-[2.6rem] p-8 md:p-12">
+            <div className="glass-panel texture-panel overflow-hidden rounded-[2rem] p-6 md:p-10 lg:rounded-[2.6rem] lg:p-12">
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
                 <div>
                   <p className="section-kicker">Visit or Order</p>
-                  <h2 className="section-title text-[2.9rem] md:text-6xl">Bring Café La Fe into your next hour, meeting, or slow downtown afternoon.</h2>
+                  <h2 className="section-title text-[2.35rem] md:text-5xl lg:text-6xl">Bring Café La Fe into your next hour, meeting, or slow downtown afternoon.</h2>
                   <p className="section-copy max-w-2xl">
                     Stop by for coffee and empanadas, place an online order, or plan catering for your next event.
                   </p>
@@ -206,11 +206,11 @@ export default function HomePage() {
                     href={ORDER_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex w-full justify-center rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream transition hover:-translate-y-0.5 lg:w-auto"
+                    className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream transition hover:-translate-y-0.5 lg:w-auto"
                   >
                     Order Online
                   </a>
-                  <Link href="/about" className="inline-flex w-full justify-center rounded-full border border-ink/10 bg-white/70 px-7 py-4 text-sm uppercase tracking-[0.18em] text-ink transition hover:-translate-y-0.5 lg:w-auto">
+                  <Link href="/about" className="inline-flex min-h-14 w-full items-center justify-center rounded-full border border-ink/10 bg-white/70 px-7 py-4 text-sm uppercase tracking-[0.18em] text-ink transition hover:-translate-y-0.5 lg:w-auto">
                     Visit Us
                   </Link>
                   <p className="text-sm leading-7 text-ink/65">

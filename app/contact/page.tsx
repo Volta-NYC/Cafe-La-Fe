@@ -44,7 +44,7 @@ export default function ContactPage() {
         alt="Café La Fe contact hero"
       />
 
-      <section className="section-padding pb-14">
+      <section className="section-padding pb-10 lg:pb-14">
         <div className="section-shell">
           <Reveal>
             <p className="section-kicker">Contact</p>
@@ -60,7 +60,7 @@ export default function ContactPage() {
         <div className="section-shell grid gap-8 lg:grid-cols-[0.94fr_1.06fr]">
           <Reveal>
             <div className="space-y-5">
-              <div className="glass-panel p-8 md:p-10">
+              <div className="glass-panel p-6 md:p-8 lg:p-10">
                 <p className="section-kicker">Contact Info</p>
                 <div className="mt-6 space-y-5 text-base leading-8 text-ink/75">
                   <div>
@@ -92,13 +92,13 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="glass-panel p-8 md:p-10">
+              <div className="glass-panel p-6 md:p-8 lg:p-10">
                 <p className="section-kicker">Hours</p>
                 <div className="mt-6 grid gap-3">
                   {HOURS.map((entry) => (
-                    <div key={entry.label} className="flex items-center justify-between rounded-[1.3rem] bg-olive-50 px-5 py-4">
-                      <span className="text-xs uppercase tracking-[0.18em] text-olive-700">{entry.label}</span>
-                      <span className="text-sm text-ink/75">{entry.value}</span>
+                    <div key={entry.label} className="flex items-center justify-between gap-4 rounded-[1.2rem] bg-olive-50 px-4 py-4 md:rounded-[1.3rem] md:px-5">
+                      <span className="text-xs uppercase tracking-[0.16em] text-olive-700">{entry.label}</span>
+                      <span className="text-xs text-right text-ink/75 md:text-sm">{entry.value}</span>
                     </div>
                   ))}
                 </div>
@@ -114,11 +114,11 @@ export default function ContactPage() {
           <Reveal delay={0.08}>
             <div className="space-y-5">
               <div className="glass-panel overflow-hidden">
-                <div className="p-8 md:p-10">
+                <div className="p-6 md:p-8 lg:p-10">
                   <p className="section-kicker">Message Us</p>
-                  <h2 className="mt-3 font-display text-5xl">We’d love to hear from you.</h2>
+                  <h2 className="mt-3 font-display text-[2.2rem] md:text-4xl lg:text-5xl">We’d love to hear from you.</h2>
                 </div>
-                <form onSubmit={handleSubmit} className="grid gap-4 px-8 pb-8 md:px-10 md:pb-10">
+                <form onSubmit={handleSubmit} className="grid gap-5 px-6 pb-6 md:px-8 md:pb-8 lg:px-10 lg:pb-10">
                   <ContactField label="Name" value={name} error={errors.name} onChange={setName} />
                   <ContactField label="Email" type="email" value={email} error={errors.email} onChange={setEmail} />
                   <label className="block text-sm uppercase tracking-[0.18em] text-ink/68">
@@ -127,13 +127,13 @@ export default function ContactPage() {
                       rows={6}
                       value={message}
                       onChange={(event) => setMessage(event.target.value)}
-                      className={`mt-3 w-full rounded-[1.6rem] border bg-white px-5 py-4 text-base text-ink outline-none transition ${
+                      className={`mt-3 w-full rounded-[1.4rem] border bg-white px-5 py-4 text-base text-ink outline-none transition touch-manipulation md:rounded-[1.6rem] ${
                         errors.message ? "border-rose-300" : "border-olive-100 focus:border-olive-300"
                       }`}
                     />
                     {errors.message ? <span className="mt-2 block text-xs normal-case tracking-normal text-rose-700">{errors.message}</span> : null}
                   </label>
-                  <button type="submit" className="rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream shadow-[0_18px_34px_rgba(42,24,16,0.16)] transition hover:-translate-y-0.5">
+                  <button type="submit" className="inline-flex min-h-14 items-center justify-center rounded-full bg-ink px-7 py-4 text-sm uppercase tracking-[0.18em] text-cream shadow-[0_18px_34px_rgba(42,24,16,0.16)] transition hover:-translate-y-0.5">
                     Send Message
                   </button>
                   {submitted ? (
@@ -150,7 +150,7 @@ export default function ContactPage() {
                   src="https://www.google.com/maps?q=70+E+1st+St,+New+York,+NY+10003&output=embed"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="h-[28rem] w-full border-0"
+                  className="h-[22rem] w-full border-0 md:h-[28rem]"
                 />
               </div>
             </div>
@@ -181,7 +181,7 @@ function ContactField({
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className={`mt-3 h-14 w-full rounded-full border bg-white px-5 text-base text-ink outline-none transition ${
+        className={`mt-3 h-14 w-full rounded-full border bg-white px-5 text-base text-ink outline-none transition touch-manipulation ${
           error ? "border-rose-300" : "border-olive-100 focus:border-olive-300"
         }`}
       />

@@ -24,10 +24,24 @@ export default function SiteHeader() {
     setIsOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
   const solid = isScrolled || !isHome || isOpen;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
       <motion.div
         initial={prefersReducedMotion ? false : { y: -14, opacity: 0 }}
         animate={prefersReducedMotion ? undefined : { y: 0, opacity: 1 }}
@@ -40,7 +54,7 @@ export default function SiteHeader() {
         ].join(" ")}
       >
         <Link href="/" className="group flex items-center gap-3" aria-label={`${SITE.name} home`}>
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1f4034,#8f6d3a)] text-xs font-semibold uppercase tracking-[0.28em] text-white shadow-[0_10px_24px_rgba(31,64,52,0.35)]">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1f4034,#8f6d3a)] text-xs font-semibold uppercase tracking-[0.28em] text-white shadow-[0_10px_24px_rgba(31,64,52,0.35)]">
             LF
           </span>
           <div className="hidden sm:block">
@@ -93,7 +107,7 @@ export default function SiteHeader() {
           aria-label="Open navigation menu"
           onClick={() => setIsOpen((current) => !current)}
           className={[
-            "inline-flex h-11 w-11 items-center justify-center rounded-full border md:hidden",
+            "inline-flex h-12 w-12 items-center justify-center rounded-full border md:hidden",
             solid ? "border-olive-200 bg-white text-ink" : "border-white/25 bg-white/10 text-white",
           ].join(" ")}
         >
@@ -118,7 +132,7 @@ export default function SiteHeader() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="mx-auto mt-3 max-w-7xl rounded-[2rem] border border-white/70 bg-cream/95 p-4 shadow-[0_24px_80px_rgba(42,24,16,0.16)] backdrop-blur-xl md:hidden"
           >
-            <nav className="flex flex-col gap-2" aria-label="Mobile">
+            <nav className="flex flex-col gap-3" aria-label="Mobile">
               {NAV_ITEMS.map((item, index) => {
                 const active = pathname === item.href;
                 return (
@@ -131,7 +145,7 @@ export default function SiteHeader() {
                     <Link
                       href={item.href}
                       className={[
-                        "block rounded-2xl px-4 py-3 text-sm uppercase tracking-[0.18em] transition",
+                        "block rounded-2xl px-5 py-4 text-sm uppercase tracking-[0.18em] transition",
                         active ? "bg-olive-100 text-ink" : "text-ink/80 hover:bg-white",
                       ].join(" ")}
                     >
@@ -144,7 +158,7 @@ export default function SiteHeader() {
                 href={ORDER_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 inline-flex justify-center rounded-2xl bg-ink px-4 py-3 text-sm uppercase tracking-[0.18em] text-cream"
+                className="mt-3 inline-flex min-h-14 justify-center rounded-2xl bg-ink px-5 py-4 text-sm uppercase tracking-[0.18em] text-cream shadow-[0_18px_34px_rgba(42,24,16,0.16)]"
               >
                 Order Online
               </a>

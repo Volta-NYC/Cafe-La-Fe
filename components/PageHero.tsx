@@ -24,7 +24,7 @@ export function PageHero({ title, subtitle, image, alt, eyebrow, ambientFloat = 
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", prefersReducedMotion ? "0%" : "12%"]);
 
   return (
-    <section ref={ref} className="relative min-h-[74vh] overflow-hidden px-4 pt-28 md:min-h-[82vh] md:px-6 md:pt-32">
+    <section ref={ref} className="relative min-h-[58vh] overflow-hidden px-4 pt-24 md:min-h-[68vh] md:px-6 md:pt-28 lg:min-h-[82vh] lg:pt-32">
       <motion.div
         className="absolute inset-0"
         style={{ scale: imageScale, y: imageY }}
@@ -42,16 +42,16 @@ export function PageHero({ title, subtitle, image, alt, eyebrow, ambientFloat = 
         <Image src={image} alt={alt} fill priority className="object-cover" sizes="100vw" />
       </motion.div>
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,10,8,0.2),rgba(15,10,8,0.62)),radial-gradient(circle_at_top,rgba(255,242,224,0.16),transparent_36%)]" />
-      <div className="section-shell relative z-10 flex min-h-[66vh] items-end pb-14 md:min-h-[72vh] md:pb-20">
+      <div className="section-shell relative z-10 flex min-h-[52vh] items-end pb-10 md:min-h-[60vh] md:pb-14 lg:min-h-[72vh] lg:pb-20">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl text-white"
         >
-          {eyebrow ? <p className="text-sm uppercase tracking-[0.34em] text-white/72">{eyebrow}</p> : null}
-          <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-7xl">{title}</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/80 md:text-xl">{subtitle}</p>
+          {eyebrow ? <p className="text-[0.7rem] uppercase tracking-[0.3em] text-white/72 md:text-sm md:tracking-[0.34em]">{eyebrow}</p> : null}
+          <h1 className="mt-3 font-display text-[2.7rem] leading-[0.96] md:mt-4 md:text-6xl lg:text-7xl">{title}</h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-white/80 md:mt-5 md:text-lg md:leading-8 lg:mt-6 lg:text-xl">{subtitle}</p>
         </motion.div>
       </div>
     </section>

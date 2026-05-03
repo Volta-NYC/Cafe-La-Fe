@@ -15,7 +15,7 @@ export default function AboutPage() {
         alt={HERO_IMAGES[0].alt}
       />
 
-      <section className="section-padding pb-14">
+      <section className="section-padding pb-10 lg:pb-14">
         <div className="section-shell grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <Reveal>
             <div>
@@ -28,10 +28,10 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="glass-panel texture-panel flex min-h-[24rem] flex-col justify-between rounded-[2.2rem] p-8 md:min-h-[30rem] md:p-10">
+            <div className="glass-panel texture-panel flex min-h-[20rem] flex-col justify-between rounded-[1.8rem] p-6 md:min-h-[24rem] md:rounded-[2.2rem] md:p-8 lg:min-h-[30rem] lg:p-10">
               <div>
                 <p className="section-kicker">Neighborhood Feel</p>
-                <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">Lower East Side roots, East Village energy, and a café that feels open to everyone.</h2>
+                <h2 className="mt-4 font-display text-[2.1rem] leading-tight md:text-4xl lg:text-5xl">Lower East Side roots, East Village energy, and a café that feels open to everyone.</h2>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-[1.6rem] border border-dashed border-olive-200 bg-white/70 p-5">
@@ -51,9 +51,9 @@ export default function AboutPage() {
       <section className="section-padding pt-0">
         <div className="section-shell grid gap-8 lg:grid-cols-[1fr_0.92fr]">
           <Reveal>
-            <div className="glass-panel texture-panel p-8 md:p-10">
+            <div className="glass-panel texture-panel p-6 md:p-8 lg:p-10">
               <p className="section-kicker">Our Story</p>
-              <div className="mt-6 space-y-5 text-lg leading-9 text-ink/76">
+              <div className="mt-5 space-y-4 text-base leading-8 text-ink/76 md:mt-6 md:space-y-5 md:text-lg md:leading-9">
                 {ABOUT_STORY.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -62,7 +62,7 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="glass-panel p-8 md:p-10">
+            <div className="glass-panel p-6 md:p-8 lg:p-10">
               <p className="section-kicker">East Village Highlights</p>
               <div className="mt-6 space-y-4">
                 {LOCATION_HIGHLIGHTS.map((highlight) => (
@@ -71,16 +71,16 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                 <a
                   href={ORDER_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full bg-ink px-6 py-3 text-sm uppercase tracking-[0.18em] text-cream"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full bg-ink px-6 py-3 text-sm uppercase tracking-[0.18em] text-cream"
                 >
                   Order Online
                 </a>
-                <Link href="/contact" className="rounded-full border border-ink/10 bg-white px-6 py-3 text-sm uppercase tracking-[0.18em] text-ink">
+                <Link href="/contact" className="inline-flex min-h-14 items-center justify-center rounded-full border border-ink/10 bg-white px-6 py-3 text-sm uppercase tracking-[0.18em] text-ink">
                   Contact Us
                 </Link>
               </div>
@@ -93,35 +93,35 @@ export default function AboutPage() {
         <div className="section-shell grid gap-8 lg:grid-cols-[0.94fr_1.06fr] lg:items-start">
           <Reveal>
             <div className="glass-panel overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(42,24,16,0.12)]">
-              <div className="p-8 md:p-10">
+              <div className="p-6 md:p-8 lg:p-10">
                 <p className="section-kicker">Visit Café La Fe</p>
-                <h2 className="section-title text-[2.8rem] md:text-5xl">70 E 1st St</h2>
-                <p className="mt-2 text-lg text-ink/72">{SITE.cityStateZip}</p>
-                <div className="mt-8 grid gap-3">
+                <h2 className="section-title text-[2.25rem] md:text-[2.8rem] lg:text-5xl">70 E 1st St</h2>
+                <p className="mt-2 text-base text-ink/72 md:text-lg">{SITE.cityStateZip}</p>
+                <div className="mt-6 grid gap-3 md:mt-8">
                   {HOURS.map((entry, index) => (
                     <Reveal key={entry.label} delay={index * 0.05}>
-                      <div className="flex items-center justify-between rounded-[1.3rem] bg-olive-50 px-5 py-4">
-                        <span className="text-sm uppercase tracking-[0.18em] text-olive-700">{entry.label}</span>
-                        <span className="text-sm text-ink/75">{entry.value}</span>
+                      <div className="flex items-center justify-between gap-4 rounded-[1.2rem] bg-olive-50 px-4 py-4 md:rounded-[1.3rem] md:px-5">
+                        <span className="text-xs uppercase tracking-[0.16em] text-olive-700 md:text-sm md:tracking-[0.18em]">{entry.label}</span>
+                        <span className="text-xs text-right text-ink/75 md:text-sm">{entry.value}</span>
                       </div>
                     </Reveal>
                   ))}
                 </div>
-                <div className="mt-8 flex flex-wrap gap-4">
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                   <a
                     href={SITE.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full bg-ink px-6 py-3 text-sm uppercase tracking-[0.18em] text-cream"
+                    className="inline-flex min-h-14 items-center justify-center rounded-full bg-ink px-6 py-3 text-sm uppercase tracking-[0.18em] text-cream"
                   >
                     Get Directions
                   </a>
-                  <a href={SITE.phoneHref} className="rounded-full border border-ink/10 bg-white px-6 py-3 text-sm uppercase tracking-[0.18em] text-ink">
+                  <a href={SITE.phoneHref} className="inline-flex min-h-14 items-center justify-center rounded-full border border-ink/10 bg-white px-6 py-3 text-sm uppercase tracking-[0.18em] text-ink">
                     Call the Café
                   </a>
                 </div>
               </div>
-              <div className="h-[24rem]">
+              <div className="h-[20rem] md:h-[24rem]">
                 <iframe
                   title="Map to Café La Fe"
                   src="https://www.google.com/maps?q=70+E+1st+St,+New+York,+NY+10003&output=embed"
@@ -135,7 +135,7 @@ export default function AboutPage() {
 
           <Reveal delay={0.08}>
             <div className="grid gap-4">
-              <div className="glass-panel p-8 md:p-10">
+              <div className="glass-panel p-6 md:p-8 lg:p-10">
                 <p className="section-kicker">What You’ll Find</p>
                 <div className="mt-6 grid gap-4">
                   <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.9))] p-5">

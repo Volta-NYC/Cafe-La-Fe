@@ -75,7 +75,7 @@ export default function MenuPage() {
       />
 
       <section className="section-padding">
-        <div className="page-shell-wide grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[360px_minmax(0,1fr)]">
+        <div className="page-shell-wide grid gap-5 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-start lg:gap-8 xl:grid-cols-[360px_minmax(0,1fr)]">
           <aside className="glass-panel sticky top-28 hidden self-start p-6 lg:block">
               <p className="section-kicker">Menu Explorer</p>
               <h2 className="mt-3 font-display text-4xl leading-tight text-ink">Browse by section.</h2>
@@ -129,12 +129,12 @@ export default function MenuPage() {
             <Reveal>
               <div className="glass-panel p-4 md:p-5">
                 <p className="section-kicker">Menu Explorer</p>
-                <h2 className="section-title text-[2.6rem]">Search the full Café La Fe menu.</h2>
+                <h2 className="section-title text-[2.2rem] sm:text-[2.6rem]">Search the full Café La Fe menu.</h2>
                 <p className="section-copy max-w-3xl">
                   Browse by section, filter by menu group, and search by item name or flavor.
                 </p>
 
-                <div className="mt-6 flex flex-col gap-4">
+                <div className="mt-5 flex flex-col gap-4">
                   <label className="relative block">
                     <span className="sr-only">Search menu</span>
                     <input
@@ -144,7 +144,7 @@ export default function MenuPage() {
                         startTransition(() => setQuery(next));
                       }}
                       placeholder={`Search for ${MENU_SEARCH_HINTS[0]}, ${MENU_SEARCH_HINTS[1]}, ${MENU_SEARCH_HINTS[4]}...`}
-                      className="h-14 w-full rounded-full border border-olive-100 bg-white px-6 text-sm text-ink outline-none ring-0 placeholder:text-ink/40 focus:border-olive-300"
+                      className="h-14 w-full rounded-full border border-olive-100 bg-white px-5 text-sm text-ink outline-none ring-0 placeholder:text-ink/40 focus:border-olive-300"
                     />
                   </label>
 
@@ -177,23 +177,25 @@ export default function MenuPage() {
               </div>
             </Reveal>
 
-            <div className="no-scrollbar mt-5 -mx-1 overflow-x-auto pb-1">
-              <div className="flex min-w-max gap-3 px-1">
+            <div className="sticky top-[5.4rem] z-20 -mx-4 border-y border-olive-100/70 bg-cream/95 px-4 py-3 backdrop-blur md:top-[6rem] lg:hidden">
+              <div className="no-scrollbar overflow-x-auto">
+                <div className="flex min-w-max gap-3">
                 {filteredGroups.map((group) => (
                   <a
                     key={group.slug}
                     href={`#${groupId(group)}`}
-                    className={`rounded-full px-4 py-2 text-xs uppercase tracking-[0.18em] transition ${
+                    className={`inline-flex min-h-11 items-center rounded-full px-4 py-2 text-xs uppercase tracking-[0.18em] transition ${
                       activeSection === group.slug ? "bg-ink text-cream" : "bg-white text-ink/75 ring-1 ring-olive-100"
                     }`}
                   >
                     {group.title}
                   </a>
                 ))}
+                </div>
               </div>
             </div>
 
-            <div className="mt-5 space-y-5">
+            <div className="mt-5 space-y-4">
               {filteredGroups.map((group) => {
                 const open = openMobileSection === group.slug;
 
@@ -222,16 +224,16 @@ export default function MenuPage() {
                           >
                             <div className="grid gap-4 px-5 pb-5">
                               {group.items.map((item) => (
-                                <article key={item.name} className="rounded-[1.6rem] border border-olive-100 bg-white p-4">
-                                  <div className="mb-4 flex h-24 items-end rounded-[1.2rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.95))] p-4">
+                              <article key={item.name} className="rounded-[1.35rem] border border-olive-100 bg-white p-4 sm:rounded-[1.6rem]">
+                                  <div className="mb-4 flex h-20 items-end rounded-[1rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.95))] p-4 sm:h-24 sm:rounded-[1.2rem]">
                                     <span className="text-[0.68rem] uppercase tracking-[0.24em] text-olive-700">Menu Item</span>
                                   </div>
                                   <div className="flex items-start justify-between gap-4">
                                     <div>
-                                      <h2 className="text-2xl leading-none">{item.name}</h2>
+                                      <h2 className="text-xl leading-tight sm:text-2xl sm:leading-none">{item.name}</h2>
                                       <p className="mt-2 text-xs uppercase tracking-[0.18em] text-olive-700">{item.originalCategory}</p>
                                     </div>
-                                    <span className="rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.16em] text-olive-800">{item.price}</span>
+                                    <span className="shrink-0 rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.16em] text-olive-800">{item.price}</span>
                                   </div>
                                   <p className="mt-3 text-sm leading-7 text-ink/68">{item.description}</p>
                                 </article>
