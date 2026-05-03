@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { startTransition, useDeferredValue, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
@@ -18,20 +17,22 @@ export default function MenuPage() {
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const [openMobileSection, setOpenMobileSection] = useState<string>(MENU_GROUPS[0].slug);
+  const [activeFilter, setActiveFilter] = useState<string>("all");
+
+  const filters = useMemo(() => ["all", ...MENU_GROUPS.map((group) => group.slug)], []);
 
   const filteredGroups = useMemo(() => {
     const search = normalize(deferredQuery);
-    if (!search) {
-      return MENU_GROUPS;
-    }
 
     return MENU_GROUPS.map((group) => ({
       ...group,
-      items: group.items.filter((item) =>
-        normalize(`${item.name} ${item.description} ${item.originalCategory}`).includes(search),
-      ),
+      items: group.items.filter((item) => {
+        const matchesSearch = !search || normalize(`${item.name} ${item.description} ${item.originalCategory}`).includes(search);
+        const matchesFilter = activeFilter === "all" || group.slug === activeFilter;
+        return matchesSearch && matchesFilter;
+      }),
     })).filter((group) => group.items.length > 0);
-  }, [deferredQuery]);
+  }, [activeFilter, deferredQuery]);
 
   return (
     <main className="pt-28 md:pt-32">
@@ -41,13 +42,13 @@ export default function MenuPage() {
             <p className="section-kicker">Menu</p>
             <h1 className="section-title">Search the full Café La Fe menu.</h1>
             <p className="section-copy max-w-3xl">
-              The original menu categories are grouped into broader sections so the experience feels easier to browse, while still surfacing the café’s signature drinks, empanadas, pastries, and refreshers.
+              Browse by section, filter by menu group, and search by item name or flavor. The layout stays text-first so the menu is easier to scan and maintain.
             </p>
           </Reveal>
 
           <Reveal delay={0.08}>
             <div className="glass-panel mt-10 p-4 md:p-5">
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex flex-col gap-4">
                 <label className="relative block lg:w-[28rem]">
                   <span className="sr-only">Search menu</span>
                   <input
@@ -60,8 +61,31 @@ export default function MenuPage() {
                     className="h-14 w-full rounded-full border border-olive-100 bg-white px-6 text-sm text-ink outline-none ring-0 placeholder:text-ink/40 focus:border-olive-300"
                   />
                 </label>
+
+                <div className="flex flex-wrap gap-3">
+                  {filters.map((filter) => {
+                    const selected = activeFilter === filter;
+                    const label = filter === "all" ? "All Sections" : MENU_GROUPS.find((group) => group.slug === filter)?.title ?? filter;
+
+                    return (
+                      <button
+                        key={filter}
+                        type="button"
+                        onClick={() => setActiveFilter(filter)}
+                        className={`rounded-full px-4 py-2 text-xs uppercase tracking-[0.18em] transition ${
+                          selected ? "bg-ink text-cream" : "bg-white text-ink/72 ring-1 ring-olive-100 hover:bg-olive-50"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+
                 <p className="text-sm leading-7 text-ink/60">
-                  {query ? `${filteredGroups.reduce((total, group) => total + group.items.length, 0)} results found.` : "Browse by section or jump with the sidebar."}
+                  {query || activeFilter !== "all"
+                    ? `${filteredGroups.reduce((total, group) => total + group.items.length, 0)} results found.`
+                    : "Browse by section, search by name, or narrow with filters."}
                 </p>
               </div>
             </div>
@@ -92,6 +116,7 @@ export default function MenuPage() {
           <div className="space-y-5 lg:hidden">
             {filteredGroups.map((group) => {
               const open = openMobileSection === group.slug;
+
               return (
                 <Reveal key={group.slug}>
                   <div className="glass-panel overflow-hidden">
@@ -106,6 +131,7 @@ export default function MenuPage() {
                       </div>
                       <span className="text-2xl text-ink/60">{open ? "−" : "+"}</span>
                     </button>
+
                     <AnimatePresence initial={false}>
                       {open ? (
                         <motion.div
@@ -117,8 +143,8 @@ export default function MenuPage() {
                           <div className="grid gap-4 px-5 pb-5">
                             {group.items.map((item) => (
                               <article key={item.name} className="rounded-[1.6rem] border border-olive-100 bg-white p-4">
-                                <div className="relative mb-4 h-48 overflow-hidden rounded-[1.2rem]">
-                                  <Image src={item.image} alt={item.name} fill className="object-cover" sizes="100vw" />
+                                <div className="mb-4 flex h-24 items-end rounded-[1.2rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.95))] p-4">
+                                  <span className="text-[0.68rem] uppercase tracking-[0.24em] text-olive-700">Menu Item</span>
                                 </div>
                                 <div className="flex items-start justify-between gap-4">
                                   <div>
@@ -157,30 +183,29 @@ export default function MenuPage() {
                       <h2 className="section-title text-[3rem] md:text-[3.8rem]">{group.title}</h2>
                       <p className="mt-4 max-w-2xl text-base leading-8 text-ink/70">{group.description}</p>
                     </div>
+
                     <div className="grid gap-5 xl:grid-cols-2">
                       {group.items.map((item) => (
-                        <article key={item.name} className="glass-panel overflow-hidden">
-                          <div className="grid md:grid-cols-[240px_minmax(0,1fr)]">
-                            <div className="relative h-64 md:h-full">
-                              <Image src={item.image} alt={item.name} fill className="object-cover" sizes="(min-width: 1280px) 18vw, 100vw" />
-                            </div>
-                            <div className="flex flex-col justify-between p-6">
-                              <div>
-                                <div className="flex items-start justify-between gap-4">
-                                  <div>
-                                    <h3 className="text-3xl leading-tight">{item.name}</h3>
-                                    <p className="mt-2 text-xs uppercase tracking-[0.18em] text-olive-700">{item.originalCategory}</p>
-                                  </div>
-                                  <span className="rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.16em] text-olive-800">{item.price}</span>
+                        <article key={item.name} className="glass-panel p-6">
+                          <div className="mb-5 flex h-28 items-end rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.92))] p-5">
+                            <span className="text-[0.7rem] uppercase tracking-[0.24em] text-olive-700">Placeholder</span>
+                          </div>
+                          <div className="flex flex-col justify-between">
+                            <div>
+                              <div className="flex items-start justify-between gap-4">
+                                <div>
+                                  <h3 className="text-3xl leading-tight">{item.name}</h3>
+                                  <p className="mt-2 text-xs uppercase tracking-[0.18em] text-olive-700">{item.originalCategory}</p>
                                 </div>
-                                <p className="mt-4 text-base leading-8 text-ink/68">{item.description}</p>
+                                <span className="rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.16em] text-olive-800">{item.price}</span>
                               </div>
-                              {item.featured ? (
-                                <span className="mt-6 inline-flex w-fit rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[0.68rem] uppercase tracking-[0.2em] text-amber-700">
-                                  Signature Favorite
-                                </span>
-                              ) : null}
+                              <p className="mt-4 text-base leading-8 text-ink/68">{item.description}</p>
                             </div>
+                            {item.featured ? (
+                              <span className="mt-6 inline-flex w-fit rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[0.68rem] uppercase tracking-[0.2em] text-amber-700">
+                                Signature Favorite
+                              </span>
+                            ) : null}
                           </div>
                         </article>
                       ))}

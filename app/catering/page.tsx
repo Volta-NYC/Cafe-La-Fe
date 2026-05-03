@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
-import { CATERING_FEATURES, EVENT_TYPES, GALLERY_IMAGES, SITE } from "@/lib/siteData";
+import { CATERING_FEATURES, EVENT_TYPES, SITE } from "@/lib/siteData";
 
 type FormState = {
   name: string;
@@ -31,10 +30,7 @@ export default function CateringPage() {
   function validate() {
     const nextErrors: Partial<Record<keyof FormState, string>> = {};
 
-    if (!form.name.trim()) {
-      nextErrors.name = "Please share your name.";
-    }
-
+    if (!form.name.trim()) nextErrors.name = "Please share your name.";
     if (!form.email.trim()) {
       nextErrors.email = "Please add an email address.";
     } else if (!/^\S+@\S+\.\S+$/.test(form.email)) {
@@ -74,16 +70,20 @@ export default function CateringPage() {
               </p>
             </div>
           </Reveal>
+
           <Reveal delay={0.08}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="relative h-[24rem] overflow-hidden rounded-[2.2rem] sm:row-span-2 sm:h-[34rem]">
-                <Image src={GALLERY_IMAGES[8].src} alt={GALLERY_IMAGES[8].alt} fill className="object-cover" sizes="(min-width: 640px) 34vw, 100vw" />
-              </div>
-              <div className="relative h-56 overflow-hidden rounded-[1.8rem]">
-                <Image src={GALLERY_IMAGES[0].src} alt={GALLERY_IMAGES[0].alt} fill className="object-cover" sizes="(min-width: 640px) 22vw, 100vw" />
-              </div>
-              <div className="relative h-56 overflow-hidden rounded-[1.8rem]">
-                <Image src={GALLERY_IMAGES[5].src} alt={GALLERY_IMAGES[5].alt} fill className="object-cover" sizes="(min-width: 640px) 22vw, 100vw" />
+            <div className="glass-panel texture-panel min-h-[24rem] rounded-[2.2rem] p-8 md:min-h-[32rem] md:p-10">
+              <p className="section-kicker">Service Style</p>
+              <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">Flexible catering for creative mornings, office lunches, and community gatherings.</h2>
+              <div className="mt-8 grid gap-4">
+                <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-white/70 p-5">
+                  <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Curated Menus</p>
+                  <p className="mt-3 text-base leading-8 text-ink/72">Mix drinks, savory favorites, pastries, and sweet finishes based on the event tone and guest count.</p>
+                </div>
+                <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-white/70 p-5">
+                  <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Warm, Reliable Delivery</p>
+                  <p className="mt-3 text-base leading-8 text-ink/72">Built for a polished handoff with clear portions, flexible choices, and a hospitality-first approach.</p>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -104,6 +104,7 @@ export default function CateringPage() {
                   ))}
                 </div>
               </div>
+
               <div className="glass-panel p-8 md:p-10">
                 <p className="section-kicker">Perfect For</p>
                 <div className="mt-6 grid gap-3">
@@ -126,35 +127,11 @@ export default function CateringPage() {
               </p>
 
               <form onSubmit={handleSubmit} className="mt-8 grid gap-4 md:grid-cols-2">
-                <Field
-                  label="Name *"
-                  value={form.name}
-                  error={errors.name}
-                  onChange={(value) => setForm((current) => ({ ...current, name: value }))}
-                />
-                <Field
-                  label="Email *"
-                  type="email"
-                  value={form.email}
-                  error={errors.email}
-                  onChange={(value) => setForm((current) => ({ ...current, email: value }))}
-                />
-                <Field
-                  label="Phone"
-                  value={form.phone}
-                  onChange={(value) => setForm((current) => ({ ...current, phone: value }))}
-                />
-                <Field
-                  label="Event Date"
-                  type="date"
-                  value={form.eventDate}
-                  onChange={(value) => setForm((current) => ({ ...current, eventDate: value }))}
-                />
-                <Field
-                  label="Estimated Guests"
-                  value={form.guestCount}
-                  onChange={(value) => setForm((current) => ({ ...current, guestCount: value }))}
-                />
+                <Field label="Name *" value={form.name} error={errors.name} onChange={(value) => setForm((current) => ({ ...current, name: value }))} />
+                <Field label="Email *" type="email" value={form.email} error={errors.email} onChange={(value) => setForm((current) => ({ ...current, email: value }))} />
+                <Field label="Phone" value={form.phone} onChange={(value) => setForm((current) => ({ ...current, phone: value }))} />
+                <Field label="Event Date" type="date" value={form.eventDate} onChange={(value) => setForm((current) => ({ ...current, eventDate: value }))} />
+                <Field label="Estimated Guests" value={form.guestCount} onChange={(value) => setForm((current) => ({ ...current, guestCount: value }))} />
                 <div className="md:col-span-2">
                   <label className="block text-sm uppercase tracking-[0.18em] text-ink/68">
                     Additional Details

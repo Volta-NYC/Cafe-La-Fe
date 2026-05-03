@@ -38,6 +38,7 @@ export const HERO_IMAGES = [
   { src: "/hero.jpeg", alt: "Café La Fe storefront at dusk" },
   { src: "/hero3.png", alt: "Café La Fe storefront with pink welcome sign" },
   { src: "/hero2.png", alt: "Café La Fe sidewalk cafe in the East Village" },
+  { src: "/hero4.jpg", alt: "Café La Fe storefront exterior" },
 ] as const;
 
 export const GALLERY_IMAGES = [

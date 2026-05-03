@@ -32,14 +32,14 @@ export default function SiteHeader() {
           "mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition-all duration-300 md:px-6",
           solid
             ? "border-white/70 bg-cream/90 shadow-[0_20px_70px_rgba(42,24,16,0.14)] backdrop-blur-xl"
-            : "border-white/15 bg-transparent backdrop-blur-0",
+            : "border-white/20 bg-[rgba(23,18,16,0.56)] shadow-[0_14px_45px_rgba(0,0,0,0.18)] backdrop-blur-md",
         ].join(" ")}
       >
         <Link href="/" className="group flex items-center gap-3" aria-label={`${SITE.name} home`}>
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1f4034,#8f6d3a)] text-xs font-semibold uppercase tracking-[0.28em] text-white shadow-[0_10px_24px_rgba(31,64,52,0.35)]">
             LF
           </span>
-          <div>
+          <div className="hidden sm:block">
             <p className={`font-display text-xl leading-none ${solid ? "text-ink" : "text-white"}`}>{SITE.name}</p>
             <p className={`text-[0.63rem] uppercase tracking-[0.32em] ${solid ? "text-olive-700" : "text-white/72"}`}>
               {SITE.tagline}
@@ -71,7 +71,9 @@ export default function SiteHeader() {
             href={ORDER_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center rounded-full bg-ink px-5 py-3 text-sm font-medium tracking-[0.18em] text-cream transition hover:-translate-y-0.5 hover:bg-olive-900"
+            className={`inline-flex items-center rounded-full px-5 py-3 text-sm font-medium tracking-[0.18em] transition hover:-translate-y-0.5 ${
+              solid ? "bg-ink text-cream hover:bg-olive-900" : "bg-cream text-ink hover:bg-white"
+            }`}
           >
             Order Online
           </a>

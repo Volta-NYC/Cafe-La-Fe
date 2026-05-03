@@ -4,17 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
-import {
-  FAVORITES,
-  FEATURED_CATEGORIES,
-  GALLERY_IMAGES,
-  HERO_IMAGES,
-  NEIGHBORHOOD_HIGHLIGHTS,
-  ORDER_URL,
-  SIGNATURE_DRINKS,
-  SITE,
-  TESTIMONIALS,
-} from "@/lib/siteData";
+import { FAVORITES, GALLERY_IMAGES, HERO_IMAGES, NEIGHBORHOOD_HIGHLIGHTS, ORDER_URL, SITE, TESTIMONIALS } from "@/lib/siteData";
 
 export default function HomePage() {
   const prefersReducedMotion = useReducedMotion();
@@ -22,6 +12,7 @@ export default function HomePage() {
   const heroOneY = useTransform(scrollYProgress, [0, 1], ["0%", prefersReducedMotion ? "0%" : "18%"]);
   const heroTwoY = useTransform(scrollYProgress, [0, 1], ["0%", prefersReducedMotion ? "0%" : "12%"]);
   const heroThreeY = useTransform(scrollYProgress, [0, 1], ["0%", prefersReducedMotion ? "0%" : "22%"]);
+  const heroFourY = useTransform(scrollYProgress, [0, 1], ["0%", prefersReducedMotion ? "0%" : "15%"]);
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, prefersReducedMotion ? 1 : 1.08]);
 
   return (
@@ -30,14 +21,17 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,247,235,0.28),transparent_34%),linear-gradient(180deg,rgba(29,20,16,0.2),rgba(29,20,16,0.58))]" />
           <motion.div style={{ scale: heroScale }} className="absolute inset-0">
-            <motion.div style={{ y: heroOneY }} className="absolute left-[3%] top-20 hidden h-[72vh] w-[22vw] min-w-[220px] overflow-hidden rounded-[2.8rem] shadow-[0_40px_100px_rgba(0,0,0,0.3)] lg:block">
-              <Image src={HERO_IMAGES[0].src} alt={HERO_IMAGES[0].alt} fill className="object-cover" priority sizes="22vw" />
+            <motion.div style={{ y: heroOneY }} className="absolute left-[3%] top-20 hidden h-[72vh] w-[20vw] min-w-[200px] overflow-hidden rounded-[2.8rem] shadow-[0_40px_100px_rgba(0,0,0,0.3)] lg:block">
+              <Image src={HERO_IMAGES[0].src} alt={HERO_IMAGES[0].alt} fill className="object-cover" priority sizes="20vw" />
             </motion.div>
-            <motion.div style={{ y: heroTwoY }} className="absolute left-1/2 top-0 h-[78vh] w-[58vw] -translate-x-1/2 overflow-hidden rounded-[2.8rem] shadow-[0_40px_120px_rgba(0,0,0,0.35)] md:h-[84vh] lg:w-[32vw]">
-              <Image src={HERO_IMAGES[1].src} alt={HERO_IMAGES[1].alt} fill className="object-cover" priority sizes="(min-width: 1024px) 32vw, 58vw" />
+            <motion.div style={{ y: heroTwoY }} className="absolute left-1/2 top-0 h-[78vh] w-[58vw] -translate-x-1/2 overflow-hidden rounded-[2.8rem] shadow-[0_40px_120px_rgba(0,0,0,0.35)] md:h-[84vh] lg:w-[28vw]">
+              <Image src={HERO_IMAGES[1].src} alt={HERO_IMAGES[1].alt} fill className="object-cover" priority sizes="(min-width: 1024px) 28vw, 58vw" />
             </motion.div>
-            <motion.div style={{ y: heroThreeY }} className="absolute right-[4%] top-28 hidden h-[68vh] w-[24vw] min-w-[220px] overflow-hidden rounded-[2.8rem] shadow-[0_40px_100px_rgba(0,0,0,0.32)] lg:block">
-              <Image src={HERO_IMAGES[2].src} alt={HERO_IMAGES[2].alt} fill className="object-cover" priority sizes="24vw" />
+            <motion.div style={{ y: heroThreeY }} className="absolute right-[24%] top-28 hidden h-[66vh] w-[18vw] min-w-[190px] overflow-hidden rounded-[2.8rem] shadow-[0_40px_100px_rgba(0,0,0,0.32)] xl:block">
+              <Image src={HERO_IMAGES[2].src} alt={HERO_IMAGES[2].alt} fill className="object-cover" priority sizes="18vw" />
+            </motion.div>
+            <motion.div style={{ y: heroFourY }} className="absolute right-[4%] top-16 hidden h-[72vh] w-[22vw] min-w-[220px] overflow-hidden rounded-[2.8rem] shadow-[0_40px_100px_rgba(0,0,0,0.32)] lg:block">
+              <Image src={HERO_IMAGES[3].src} alt={HERO_IMAGES[3].alt} fill className="object-cover" priority sizes="22vw" />
             </motion.div>
           </motion.div>
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,14,0.68),rgba(27,18,14,0.16),rgba(27,18,14,0.5))]" />
@@ -92,90 +86,37 @@ export default function HomePage() {
       </section>
 
       <section className="section-padding">
-        <div className="section-shell grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+        <div className="section-shell">
           <Reveal>
-            <div>
-              <p className="section-kicker">Featured Categories</p>
-              <h2 className="section-title">A menu made to feel generous, joyful, and deeply shareable.</h2>
-              <p className="section-copy">
-                From espresso and empanadas to fruit-forward matcha and bubble tea, every category is designed to feel colorful, handcrafted, and worth coming back for.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {FEATURED_CATEGORIES.map((category, index) => (
-                <div
-                  key={category.title}
-                  className={`glass-panel texture-panel overflow-hidden ${index === 0 ? "sm:col-span-2 xl:col-span-1" : ""}`}
-                >
-                  <div className="relative h-64">
-                    <Image src={category.image} alt={category.title} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 1280px) 18vw, (min-width: 640px) 40vw, 100vw" />
-                  </div>
-                  <div className="space-y-3 p-6">
-                    <p className="text-xs uppercase tracking-[0.3em] text-olive-700">{category.title}</p>
-                    <p className="text-base leading-7 text-ink/75">{category.blurb}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section-padding pt-0">
-        <div className="section-shell grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
-          <Reveal>
-            <div className="glass-panel texture-panel p-8 md:p-10">
+            <div className="max-w-3xl">
               <p className="section-kicker">About Café La Fe</p>
-              <h2 className="section-title text-[2.75rem] md:text-5xl">Built with care, rooted in neighborhood warmth.</h2>
-              <p className="section-copy max-w-xl">
-                Café La Fe was created to serve more than coffee. It is a welcoming corner for fresh food, fair-trade drinks, and real hospitality shaped by Lower East Side roots and community care.
+              <h2 className="section-title">A bright corner built for coffee, conversation, and staying a little longer.</h2>
+              <p className="section-copy">
+                Café La Fe was created to feel warm, modern, and rooted in real neighborhood hospitality. Organic drinks, handmade food, and a welcoming spirit lead the experience.
               </p>
-              <div className="mt-8">
-                <Link href="/about" className="inline-flex rounded-full bg-ink px-6 py-3 text-sm uppercase tracking-[0.18em] text-cream transition hover:-translate-y-0.5">
-                  Explore Our Story
-                </Link>
-              </div>
             </div>
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {GALLERY_IMAGES.slice(0, 4).map((image, index) => (
-                <div key={image.src} className={`overflow-hidden rounded-[2rem] ${index === 0 ? "sm:row-span-2" : ""}`}>
-                  <div className={`relative ${index === 0 ? "h-[31rem]" : "h-60"}`}>
-                    <Image src={image.src} alt={image.alt} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 640px) 30vw, 100vw" />
+            <div className="mt-10 glass-panel p-5 md:p-6">
+              <div className="columns-2 gap-4 md:columns-3 xl:columns-4">
+                {GALLERY_IMAGES.map((image, index) => (
+                  <div key={image.src} className={`mb-4 break-inside-avoid overflow-hidden rounded-[1.7rem] ${index % 5 === 0 ? "md:mt-8" : ""}`}>
+                    <div className="relative min-h-[14rem] overflow-hidden rounded-[1.7rem] bg-olive-50">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={900}
+                        height={1200}
+                        className="h-auto w-full object-cover transition duration-700 hover:scale-[1.03]"
+                        sizes="(min-width: 1280px) 20vw, (min-width: 768px) 30vw, 50vw"
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="section-padding bg-white/50">
-        <div className="section-shell">
-          <Reveal>
-            <p className="section-kicker">Signature Drinks</p>
-            <h2 className="section-title">Summer specialties with personality.</h2>
-          </Reveal>
-          <div className="mt-10 grid gap-5 lg:grid-cols-5">
-            {SIGNATURE_DRINKS.map((drink, index) => (
-              <Reveal key={drink.name} delay={index * 0.06}>
-                <article className="glass-panel texture-panel overflow-hidden">
-                  <div className="relative h-72">
-                    <Image src={drink.image} alt={drink.name} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 1024px) 18vw, 100vw" />
-                  </div>
-                  <div className="space-y-3 p-6">
-                    <h3 className="text-3xl leading-none">{drink.name}</h3>
-                    <p className="text-sm leading-7 text-ink/70">{drink.description}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -188,11 +129,11 @@ export default function HomePage() {
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
             {FAVORITES.map((item, index) => (
               <Reveal key={item.name} delay={index * 0.05}>
-                <article className="glass-panel overflow-hidden">
-                  <div className="relative h-72">
-                    <Image src={item.image} alt={item.name} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 1280px) 18vw, (min-width: 768px) 42vw, 100vw" />
+                <article className="glass-panel texture-panel p-6">
+                  <div className="mb-6 flex h-32 items-end rounded-[1.6rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.85))] p-5">
+                    <span className="text-xs uppercase tracking-[0.28em] text-olive-700">Menu Highlight</span>
                   </div>
-                  <div className="space-y-3 p-6">
+                  <div className="space-y-3">
                     <div className="flex items-start justify-between gap-4">
                       <h3 className="text-2xl leading-tight">{item.name}</h3>
                       <span className="rounded-full bg-olive-100 px-3 py-1 text-xs uppercase tracking-[0.18em] text-olive-800">{item.price}</span>

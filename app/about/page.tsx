@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { ABOUT_STORY, GALLERY_IMAGES, HERO_IMAGES, HOURS, LOCATION_HIGHLIGHTS, ORDER_URL, SITE } from "@/lib/siteData";
+import { ABOUT_STORY, HOURS, LOCATION_HIGHLIGHTS, ORDER_URL, SITE } from "@/lib/siteData";
 
 export default function AboutPage() {
   return (
@@ -17,16 +16,22 @@ export default function AboutPage() {
               </p>
             </div>
           </Reveal>
+
           <Reveal delay={0.08}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="relative h-[24rem] overflow-hidden rounded-[2.2rem] sm:row-span-2 sm:h-[34rem]">
-                <Image src={HERO_IMAGES[2].src} alt={HERO_IMAGES[2].alt} fill className="object-cover" sizes="(min-width: 640px) 32vw, 100vw" />
+            <div className="glass-panel texture-panel flex min-h-[24rem] flex-col justify-between rounded-[2.2rem] p-8 md:min-h-[30rem] md:p-10">
+              <div>
+                <p className="section-kicker">Neighborhood Feel</p>
+                <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">Lower East Side roots, East Village energy, and a café that feels open to everyone.</h2>
               </div>
-              <div className="relative h-56 overflow-hidden rounded-[2rem]">
-                <Image src={GALLERY_IMAGES[14].src} alt={GALLERY_IMAGES[14].alt} fill className="object-cover" sizes="(min-width: 640px) 22vw, 100vw" />
-              </div>
-              <div className="relative h-56 overflow-hidden rounded-[2rem]">
-                <Image src={GALLERY_IMAGES[15].src} alt={GALLERY_IMAGES[15].alt} fill className="object-cover" sizes="(min-width: 640px) 22vw, 100vw" />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-[1.6rem] border border-dashed border-olive-200 bg-white/70 p-5">
+                  <p className="text-xs uppercase tracking-[0.24em] text-olive-700">Warm Hospitality</p>
+                  <p className="mt-3 text-base leading-8 text-ink/72">Thoughtful service and a comfortable pace for quick stops or longer afternoons.</p>
+                </div>
+                <div className="rounded-[1.6rem] border border-dashed border-olive-200 bg-white/70 p-5">
+                  <p className="text-xs uppercase tracking-[0.24em] text-olive-700">Fresh Daily Menu</p>
+                  <p className="mt-3 text-base leading-8 text-ink/72">Empanadas, drinks, pastries, and café staples made to feel familiar and special.</p>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -119,12 +124,18 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {GALLERY_IMAGES.slice(4, 10).map((image, index) => (
-                <div key={image.src} className={`relative overflow-hidden rounded-[1.8rem] ${index === 1 ? "sm:row-span-2 sm:h-[31rem]" : "h-60"}`}>
-                  <Image src={image.src} alt={image.alt} fill className="object-cover transition duration-700 hover:scale-105" sizes="(min-width: 640px) 25vw, 100vw" />
+            <div className="glass-panel p-8 md:p-10">
+              <p className="section-kicker">What You’ll Find</p>
+              <div className="mt-6 grid gap-4">
+                <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.9))] p-5">
+                  <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Organic Coffee & Matcha</p>
+                  <p className="mt-3 text-base leading-8 text-ink/72">Balanced espresso drinks, premium matcha, and tea-based creations with a modern café feel.</p>
                 </div>
-              ))}
+                <div className="rounded-[1.5rem] border border-dashed border-olive-200 bg-[linear-gradient(135deg,rgba(218,230,219,0.55),rgba(255,255,255,0.9))] p-5">
+                  <p className="text-sm uppercase tracking-[0.18em] text-olive-700">Savory & Sweet Favorites</p>
+                  <p className="mt-3 text-base leading-8 text-ink/72">Handcrafted empanadas, pastries, juices, and treats designed to feel generous and comforting.</p>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
