@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -54,8 +55,8 @@ export default function SiteHeader() {
         ].join(" ")}
       >
         <Link href="/" className="group flex items-center gap-3" aria-label={`${SITE.name} home`}>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#1f4034,#8f6d3a)] text-xs font-semibold uppercase tracking-[0.28em] text-white shadow-[0_10px_24px_rgba(31,64,52,0.35)]">
-            LF
+          <span className="relative flex h-11 w-11 shrink-0 overflow-hidden rounded-full border border-white/15 bg-white shadow-[0_10px_24px_rgba(31,64,52,0.22)]">
+            <Image src="/favicon.png" alt={`${SITE.name} logo`} fill className="object-cover" sizes="44px" />
           </span>
           <div className="hidden sm:block">
             <p className={`font-display text-xl leading-none ${solid ? "text-ink" : "text-white"}`}>{SITE.name}</p>

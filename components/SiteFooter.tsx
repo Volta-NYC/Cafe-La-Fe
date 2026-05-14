@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { HOURS, NAV_ITEMS, ORDER_URL, SITE } from "@/lib/siteData";
 
@@ -7,8 +8,8 @@ export default function SiteFooter() {
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 py-14 md:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] md:px-6">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[linear-gradient(135deg,#365846,#b58f54)] text-xs font-semibold uppercase tracking-[0.28em] text-white">
-              LF
+            <span className="relative flex h-12 w-12 overflow-hidden rounded-full border border-white/15 bg-white">
+              <Image src="/favicon.png" alt={`${SITE.name} logo`} fill className="object-cover" sizes="48px" />
             </span>
             <div>
               <p className="font-display text-3xl leading-none">{SITE.name}</p>
@@ -97,6 +98,17 @@ export default function SiteFooter() {
             </a>
           </div>
         </div>
+      </div>
+      <div className="mx-auto w-full max-w-7xl px-5 pb-8 text-sm text-cream/60 md:px-6">
+        <a
+          href="https://voltanyc.org/"
+          target="_blank"
+          rel="noreferrer"
+          className="no-underline transition hover:text-[#82c341]"
+          style={{ color: "#82c341" }}
+        >
+          Made by Volta
+        </a>
       </div>
     </footer>
   );
