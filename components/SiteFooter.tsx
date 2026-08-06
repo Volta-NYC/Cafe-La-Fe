@@ -101,13 +101,13 @@ export default function SiteFooter() {
       </div>
       <div className="mx-auto w-full max-w-7xl px-5 pb-8 text-sm text-cream/60 md:px-6">
         <a
-          href="https://voltanyc.org/"
+          href="https://www.novusnyc.org/"
           target="_blank"
           rel="noreferrer"
-          className="no-underline transition hover:text-[#82c341]"
-          style={{ color: "#82c341" }}
+          className="no-underline transition hover:text-[#F6B78D]"
+          style={{ color: "#F6B78D" }}
         >
-          Made by Volta
+          Made by Novus
         </a>
       </div>
     </footer>
